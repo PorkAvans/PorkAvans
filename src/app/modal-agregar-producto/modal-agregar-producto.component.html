@@ -1,0 +1,30 @@
+<!-- modal-agregar-producto.component.html -->
+<div class="custom-modal">
+    <div class="modal-content">
+        <span class="close-btn" (click)="onCancel()">&times;</span>
+        <form (ngSubmit)="onSubmit()" #productForm="ngForm">
+            <div class="form-group">
+                <label for="user">Usuario:</label>
+                <input type="text" id="user" [(ngModel)]="nuevoProducto.user" name="user" required>
+            </div>
+            <div class="form-group">
+                <label for="distribuidor_nombre">Distribuidor:</label>
+                <!-- Cambié 'distribuidor' a 'distribuidor_nombre' para que coincida con el backend -->
+                <input type="text" id="distribuidor_nombre" [(ngModel)]="nuevoProducto.distribuidor_nombre" name="distribuidor_nombre" required>
+            </div>
+            <div class="form-group">
+                <label for="fecha">Fecha de Recolección:</label>
+                <input type="date" id="fecha" [(ngModel)]="nuevoProducto.fecha_recoleccion" name="fecha_recoleccion" required>
+            </div>
+            <div class="form-group">
+                <label for="cantidad">Cantidad:</label>
+                <input type="text" id="cantidad" [(ngModel)]="nuevoProducto.cantidad_producto" name="cantidad_producto" required>
+            </div>
+            <div class="form-group">
+                <label for="producto_id">ID del Producto:</label>
+                <input type="text" id="producto_id" [(ngModel)]="nuevoProducto.producto_id" name="producto_id" required>
+            </div>
+            <button type="submit" [disabled]="productForm.invalid">Agregar Recolección</button>
+        </form>
+    </div>
+</div>
