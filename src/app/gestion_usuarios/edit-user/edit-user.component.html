@@ -1,1 +1,59 @@
-<p>edit-user works!</p>
+<form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
+    <mat-form-field appearance="fill">
+      <mat-label>Imagen URL</mat-label>
+      <input matInput formControlName="imagen" placeholder="Ingresa la URL de la imagen" />
+      <mat-error *ngIf="editUserForm.get('imagen')?.invalid && editUserForm.get('imagen')?.touched">
+        La imagen es requerida.
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" placeholder="Ingresa el nombre" />
+      <mat-error *ngIf="editUserForm.get('nombre')?.invalid && editUserForm.get('nombre')?.touched">
+        El nombre es requerido.
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Número de Celular</mat-label>
+      <input matInput formControlName="celularr" placeholder="Ingresa el número de celular" />
+      <mat-error *ngIf="editUserForm.get('celularr')?.invalid && editUserForm.get('celularr')?.touched">
+        El celular es requerido y debe ser numérico.
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Correo Electrónico</mat-label>
+      <input matInput formControlName="correo" placeholder="Ingresa el correo" />
+      <mat-error *ngIf="editUserForm.get('correo')?.invalid && editUserForm.get('correo')?.touched">
+        Debe ser un correo válido.
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Rol</mat-label>
+      <mat-select formControlName="rol">
+        <mat-option value="admin">Administrador</mat-option>
+        <mat-option value="user">Usuario</mat-option>
+      </mat-select>
+      <mat-error *ngIf="editUserForm.get('rol')?.invalid && editUserForm.get('rol')?.touched">
+        El rol es requerido.
+      </mat-error>
+    </mat-form-field>
+  
+    <mat-form-field appearance="fill">
+      <mat-label>Estado</mat-label>
+      <mat-select formControlName="estado">
+        <mat-option value="ACTIVO">Activo</mat-option>
+        <mat-option value="INACTIVO">Inactivo</mat-option>
+      </mat-select>
+      <mat-error *ngIf="editUserForm.get('estado')?.invalid && editUserForm.get('estado')?.touched">
+        El estado es requerido.
+      </mat-error>
+    </mat-form-field>
+  
+    <button mat-raised-button type="submit" color="primary">Actualizar Usuario</button>
+    <button mat-button type="button" (click)="cancel()">Cancelar</button>
+  </form>
+  

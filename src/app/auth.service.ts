@@ -68,7 +68,7 @@ export interface ProductosResponse {
 }
 
 export interface ProductoRecolectado {
-  user:string;
+  user: string;
   distribuidor: string;
   fecha_recoleccion: string;
   cantidad_producto: number;
@@ -90,33 +90,33 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-    // Método para obtener productos del stock
-    getStockProducts(): Observable<any[]> {
-      return this.http.get<any[]>(`${this.apiUrl}/stock-products/stock-products`); // Asegúrate que esta es la ruta correcta
-    }
+  // Método para obtener productos del stock
+  getStockProducts(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.apiUrl}/stock-products/stock-products`); // Asegúrate que esta es la ruta correcta
+  }
 
-    // Nuevo método para obtener la comida suministrada
-    public getComidaSuministrada(): Observable<ComidaSuministradaResponse> {
-      return this.http.get<ComidaSuministradaResponse>(`${this.apiUrl}/comida-suministrada/comida-suministrada`).pipe(
-        catchError(error => {
-          console.error('Error al obtener la comida suministrada', error);
-          return throwError(error);
-        })
-      );
-    }
-    
-    public getUsuariosAutenticados(token: string): Observable<any[]> {
-      const headers = new HttpHeaders({
-        'Authorization': `Bearer ${token}`  // Se incluye el token en el encabezado
-      });
-  
-      return this.http.get<any[]>(`${this.apiUrl}/`, { headers }).pipe(
-        catchError(error => {
-          console.error('Error al obtener los usuarios autenticados', error);
-          return throwError(error);
-        })
-      );
-    }
+  // Nuevo método para obtener la comida suministrada
+  public getComidaSuministrada(): Observable<ComidaSuministradaResponse> {
+    return this.http.get<ComidaSuministradaResponse>(`${this.apiUrl}/comida-suministrada/comida-suministrada`).pipe(
+      catchError(error => {
+        console.error('Error al obtener la comida suministrada', error);
+        return throwError(error);
+      })
+    );
+  }
+
+  public getUsuariosAutenticados(token: string): Observable<any[]> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`  // Se incluye el token en el encabezado
+    });
+
+    return this.http.get<any[]>(`${this.apiUrl}/`, { headers }).pipe(
+      catchError(error => {
+        console.error('Error al obtener los usuarios autenticados', error);
+        return throwError(error);
+      })
+    );
+  }
 
   public login(username: string, password: string): Observable<any> {
     const headers = new HttpHeaders({
@@ -217,7 +217,7 @@ export class AuthService {
       })
     );
   }
-  
+
   public agregarProductoRecolectado(producto: any): Observable<any> {
     return this.http.post(`${this.apiUrl}/recollection/agregar-producto-recolectado`, producto).pipe(
       catchError(error => {
@@ -236,8 +236,24 @@ export class AuthService {
       })
     );
   }
-  
-  
+
+  // Método para actualizar el estado del usuario
+  public actualizarEstadoUsuario(userId: string, estado: string, token: string): Observable<any> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`,
+      'Content-Type': 'application/json'  // Asegúrate de enviar el tipo de contenido adecuado
+    });
+    const url = `${this.apiUrl}/api/update_status/${userId}?status=${estado}`;
+
+    return this.http.put<any>(url, {}, { headers }).pipe(  // El cuerpo está vacío porque los parámetros se envían como query
+      catchError(error => {
+        console.error('Error al actualizar el estado del usuario', error);
+        return throwError(error);
+      })
+    );
+
+  }
+
 
 }
 

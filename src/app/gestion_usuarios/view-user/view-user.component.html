@@ -70,7 +70,7 @@
                     <td mat-cell *matCellDef="let user">
                         <div class="slideThree">
                             <input type="checkbox" id="slideThree{{user.id}}" name="check"
-                                [checked]="user.estado === 'ACTIVO  '" (change)="toggleUserStatus(user)" />
+                                [checked]="user.estado.trim() === 'ACTIVO'" (change)="toggleUserStatus(user)" />
                             <label for="slideThree{{user.id}}"></label>
                         </div>
                     </td>

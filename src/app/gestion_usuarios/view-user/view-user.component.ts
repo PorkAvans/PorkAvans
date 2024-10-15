@@ -3,9 +3,10 @@ import { AuthService } from '../../auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { MatSort } from '@angular/material/sort'
+import { Router } from '@angular/router';
 
 interface User {  // Definición de la interfaz User
-  id: number;
+  id: string;
   imagen: string;
   nombre: string;
   celularr: string;
@@ -28,7 +29,7 @@ export class ViewUserComponent implements OnInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
-  constructor(private authService: AuthService) { }
+  constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit(): void {
     this.token = localStorage.getItem('access_token') || '';
@@ -62,17 +63,39 @@ export class ViewUserComponent implements OnInit {
   }
 
   editUser(user: User) {
-    // Lógica para editar el usuario
-    console.log('Editar usuario:', user);
-    // Aquí puedes abrir un modal o redirigir a otra página
+    // Lógica para redirigir a la página de edición del usuario
+    this.router.navigate(['/gestion_usuarios/edit-user', user.id]); // Redirige a /gestion_usuarios/edit-user/{user.id}
   }
 
-  toggleUserStatus(user: User) {
-    // Lógica para activar/desactivar el usuario
-    user.estado = user.estado === 'ACTIVO  ' ? 'INACTIVO' : 'ACTIVO  ';
-    console.log('Estado cambiado a:', user.estado);
-    // Aquí podrías hacer una llamada a un servicio para actualizar el estado en la base de datos
+  toggleUserStatus(user: any): void {
+    const newStatus = user.estado.trim() === 'ACTIVO' ? 'INACTIVO' : 'ACTIVO';  // Cambia el estado según el actual
+
+    // Muestra un cuadro de diálogo de confirmación
+    const confirmation = confirm(`¿Estás seguro de que deseas cambiar el estado a '${newStatus}'?`);
+
+    if (confirmation) {
+      // Solo se procede si el usuario confirma la acción
+      if (this.token) {
+        this.authService.actualizarEstadoUsuario(user.id, newStatus, this.token).subscribe({
+          next: () => {
+            console.log('Estado del usuario actualizado con éxito');
+            // Aquí puedes hacer lo que necesites después de la actualización
+          },
+          error: (error) => {
+            console.error('Error al actualizar estado del usuario:', error);
+          }
+        });
+      } else {
+        console.error('Token no encontrado');
+      }
+    } else {
+      // Si el usuario cancela, puedes manejarlo aquí (opcional)
+      console.log('Cambio de estado cancelado');
+    }
   }
+
+
+
 
 }
 
