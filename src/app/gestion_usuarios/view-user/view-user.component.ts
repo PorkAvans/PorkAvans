@@ -68,15 +68,16 @@ export class ViewUserComponent implements OnInit {
   }
 
   toggleUserStatus(user: any): void {
-    const newStatus = user.estado.trim() === 'ACTIVO' ? 'INACTIVO' : 'ACTIVO';  // Cambia el estado según el actual
+
+    user.estado = user.estado.trim() === 'ACTIVO' ? 'INACTIVO' : 'ACTIVO';  // Cambia el estado según el actual
 
     // Muestra un cuadro de diálogo de confirmación
-    const confirmation = confirm(`¿Estás seguro de que deseas cambiar el estado a '${newStatus}'?`);
+    const confirmation = confirm(`¿Estás seguro que deseas realizar el cambio de estado?`);
 
     if (confirmation) {
       // Solo se procede si el usuario confirma la acción
       if (this.token) {
-        this.authService.actualizarEstadoUsuario(user.id, newStatus, this.token).subscribe({
+        this.authService.actualizarEstadoUsuario(user.id, user.estado, this.token).subscribe({
           next: () => {
             console.log('Estado del usuario actualizado con éxito');
             // Aquí puedes hacer lo que necesites después de la actualización
