@@ -27,10 +27,10 @@
     "bootstrap": "^5.2.3",
     "datatables.net": "^2.1.8",
     "datatables.net-bs4": "^2.1.8",
-    "ng-apexcharts": "^1.11.0",
+    "ng-apexcharts": "^1.7.0",
     "ngx-pagination": "^6.0.3",
     "rxjs": "~7.8.0",
-    "sweetalert2": "^11.13.1",
+    "sweetalert2": "^11.6.13",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"
   },
