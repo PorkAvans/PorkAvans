@@ -65,4 +65,23 @@ export class EditUserComponent implements OnInit {
   cancel() {
     this.router.navigate(['/gestion_usuarios/view-user']);
   }
+
+  // Variable para almacenar la URL de la imagen
+imageUrl: string | ArrayBuffer | null = '';
+
+onFileSelected(event: Event): void {
+  const input = event.target as HTMLInputElement;
+  if (input.files && input.files[0]) {
+    const file = input.files[0];
+    const reader = new FileReader();
+    
+    // Cuando se cargue la imagen, actualizamos la URL
+    reader.onload = () => {
+      this.imageUrl = reader.result;
+      this.editUserForm.patchValue({ imagen: this.imageUrl }); // Si necesitas almacenar en el formGroup
+    };
+    reader.readAsDataURL(file);
+  }
+}
+
 }

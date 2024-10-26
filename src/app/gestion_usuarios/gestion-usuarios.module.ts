@@ -5,6 +5,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';  // Importa M
 import { MatInputModule } from '@angular/material/input';  // Importa MatInputModule
 import { MatSelectModule } from '@angular/material/select';  // Importa MatSelectModule
 import { MatButtonModule } from '@angular/material/button';  // Importa MatButtonModule
+import { SharedModule } from '../../shared/shared.module';
 
 import { GestionUsuariosRoutingModule } from './gestion-usuarios-routing.module';
 import { EditUserComponent } from './edit-user/edit-user.component';  // Asegúrate de importar tu componente
@@ -20,6 +21,7 @@ import { EditUserComponent } from './edit-user/edit-user.component';  // Asegúr
     MatInputModule,  // Agrega MatInputModule aquí
     MatSelectModule,  // Agrega MatSelectModule aquí
     MatButtonModule,  // Agrega MatButtonModule aquí
+    SharedModule,
     GestionUsuariosRoutingModule
   ]
 })
