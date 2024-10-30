@@ -260,4 +260,26 @@ form {
   .image-upload-container:hover .image-preview {
     opacity: 0.8;
   }
+
+
+
+  .image-upload-container {
+    display: flex;
+    flex-direction: column; /* Cambiado a columna para alinear los elementos verticalmente */
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1.5rem;
+}
+
+.file-input-label {
+    background-color: #3f51b5; /* Color del botón */
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    display: inline-block;
+    margin-top: 10px; /* Espacio entre la imagen previa y el botón */
+}
+
   

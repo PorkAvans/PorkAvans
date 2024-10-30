@@ -3,8 +3,6 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from '../../auth.service';
 
-
-
 @Component({
   selector: 'app-edit-user',
   templateUrl: './edit-user.component.html',
@@ -14,6 +12,7 @@ export class EditUserComponent implements OnInit {
   editUserForm!: FormGroup;  // Formulario reactivo para editar el usuario
   userId!: string;  // ID del usuario que se está editando
   token: string = '';  // Token para la autenticación
+  imageUrl: string | ArrayBuffer | null = ''; // Para previsualización de la imagen
 
   constructor(
     private fb: FormBuilder,
@@ -24,10 +23,9 @@ export class EditUserComponent implements OnInit {
 
   ngOnInit(): void {
     this.token = localStorage.getItem('access_token') || '';
-    this.userId = this.route.snapshot.paramMap.get('id')!;  // Obtén el ID del usuario desde la ruta
-    console.log(this.userId);
+    this.userId = this.route.snapshot.paramMap.get('id')!;  // Obtiene el ID del usuario desde la ruta
     this.initForm();  // Inicializa el formulario
-    // this.fetchUserData();  // Obtén los datos del usuario
+    this.fetchUserData();  // Obtén los datos del usuario y llena el formulario
   }
 
   // Inicializa el formulario
@@ -44,19 +42,36 @@ export class EditUserComponent implements OnInit {
 
   // Obtiene los datos del usuario y llena el formulario
   private fetchUserData() {
-    // this.authService.getUserById(this.userId, this.token).subscribe(user => {
-    //   this.editUserForm.patchValue(user);  // Rellena el formulario con los datos del usuario
-    // });
+    
+ this.authService.getUsuarioPorId(this.userId, this.token).subscribe({
+    next: (user) => {
+      console.log(user);
+      this.editUserForm.patchValue({        
+        imagen: user.imagen,       // Asegúrate de que la propiedad 'imagen' esté correctamente enlazada
+        nombre: user.nombre,
+        celularr: user.celular,    // Cambia 'celularr' por 'celular' si es necesario
+        correo: user.correo,
+        rol: user.user_rol,        // Asegúrate de que 'rol' coincida con 'user_rol'
+      });
+      this.imageUrl = 'data:image/jpeg;base64,' + user.imagen;  // Previsualización de imagen
+    },
+    error: (error) => {
+      console.error('Error al obtener el usuario:', error);
+    }
+  });
   }
 
   // Envía el formulario
   onSubmit() {
     // if (this.editUserForm.valid) {
-    //   this.authService.updateUser(this.userId, this.editUserForm.value, this.token).subscribe(() => {
-    //     console.log('Usuario actualizado con éxito');
-    //     this.router.navigate(['/gestion_usuarios/view-user']);  // Redirige después de actualizar
-    //   }, error => {
-    //     console.error('Error al actualizar el usuario:', error);
+    //   this.authService.updateUser(this.userId, this.editUserForm.value, this.token).subscribe({
+    //     next: () => {
+    //       console.log('Usuario actualizado con éxito');
+    //       this.router.navigate(['/gestion_usuarios/view-user']);  // Redirige después de actualizar
+    //     },
+    //     error: (error) => {
+    //       console.error('Error al actualizar el usuario:', error);
+    //     }
     //   });
     // }
   }
@@ -66,21 +81,20 @@ export class EditUserComponent implements OnInit {
     this.router.navigate(['/gestion_usuarios/view-user']);
   }
 
-  // Variable para almacenar la URL de la imagen
-imageUrl: string | ArrayBuffer | null = '';
+  // Maneja la selección de archivo para la imagen
+// Variable para almacenar el archivo de imagen
+fileImage: File | null = null;
 
 onFileSelected(event: Event): void {
   const input = event.target as HTMLInputElement;
   if (input.files && input.files[0]) {
-    const file = input.files[0];
+    this.fileImage = input.files[0]; // Guarda el archivo para enviar al backend
+
     const reader = new FileReader();
-    
-    // Cuando se cargue la imagen, actualizamos la URL
     reader.onload = () => {
-      this.imageUrl = reader.result;
-      this.editUserForm.patchValue({ imagen: this.imageUrl }); // Si necesitas almacenar en el formGroup
+      this.imageUrl = reader.result as string; // Actualiza la previsualización en el componente
     };
-    reader.readAsDataURL(file);
+    reader.readAsDataURL(this.fileImage);
   }
 }
 

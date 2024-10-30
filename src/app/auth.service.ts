@@ -13,6 +13,18 @@ export interface ComidaSuministrada {
   usuario: string;
 }
 
+//---------------------------------------------
+// Interfaz para la respuesta del endpoint de un solo usuario
+export interface UsuarioData {
+  imagen: string;
+  id: string;
+  nombre: string;
+  correo: string;
+  celular: string;
+  user_rol: string;
+}
+
+//--------------------------------------------
 export interface ComidaSuministradaResponse {
   comidas_suministradas: ComidaSuministrada[];
 }
@@ -93,6 +105,20 @@ export class AuthService {
   // Método para obtener productos del stock
   getStockProducts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/stock-products/stock-products`); // Asegúrate que esta es la ruta correcta
+  }
+
+  // Método para obtener un usuario por su ID
+  public getUsuarioPorId(id: string, token: string): Observable<UsuarioData> {
+    const headers = new HttpHeaders({
+      'Authorization': `Bearer ${token}`  // Incluye el token en el encabezado
+    });
+
+    return this.http.get<UsuarioData>(`${this.apiUrl}/api/user/?id=${id}`, { headers }).pipe(
+      catchError(error => {
+        console.error('Error al obtener el usuario', error);
+        return throwError(error);
+      })
+    );
   }
 
   // Nuevo método para obtener la comida suministrada
