@@ -14,26 +14,25 @@
           </div>
       </div>
   </section>
-<form [formGroup]="editUserForm" (ngSubmit)="onSubmit()">
-  <div class="image-upload-container">
-    <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagen del usuario" class="image-preview" />
-    <input type="file" id="file-input" (change)="onFileSelected($event)" accept="image/*" class="file-input" />
-    <label class="file-input-label" for="file-input">Seleccionar imagen</label>
-</div>
-
+  <form [formGroup]="editUserForm">
+    <div class="image-upload-container">
+      <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagen del usuario" class="image-preview" />
+      <input type="file" id="file-input" (change)="onFileSelected($event)" accept="image/*" class="file-input" />
+      <label class="file-input-label" for="file-input">Seleccionar imagen</label>
+    </div>
   
-  <mat-form-field appearance="fill">
-    <mat-label>Nombre</mat-label>
-    <input matInput formControlName="nombre" placeholder="Ingresa el nombre" />
-    <mat-error *ngIf="editUserForm.get('nombre')?.invalid && editUserForm.get('nombre')?.touched">
-      El nombre es requerido.
-    </mat-error>
-  </mat-form-field>
+    <mat-form-field appearance="fill">
+      <mat-label>Nombre</mat-label>
+      <input matInput formControlName="nombre" placeholder="Ingresa el nombre" />
+      <mat-error *ngIf="editUserForm.get('nombre')?.invalid && editUserForm.get('nombre')?.touched">
+        El nombre es requerido.
+      </mat-error>
+    </mat-form-field>
   
     <mat-form-field appearance="fill">
       <mat-label>Número de Celular</mat-label>
       <input matInput formControlName="celularr" placeholder="Ingresa el número de celular" />
-      <mat-error *ngIf="editUserForm.get('celular')?.invalid && editUserForm.get('celular')?.touched">
+      <mat-error *ngIf="editUserForm.get('celularr')?.invalid && editUserForm.get('celularr')?.touched">
         El celular es requerido y debe ser numérico.
       </mat-error>
     </mat-form-field>
@@ -50,14 +49,15 @@
       <mat-label>Rol</mat-label>
       <mat-select formControlName="rol">
         <mat-option value="ADMINISTRADOR">Administrador</mat-option>
-        <mat-option value="USUARIO">Usuario</mat-option>
+        <mat-option value="EMPLEADO">Empleado</mat-option>
       </mat-select>
       <mat-error *ngIf="editUserForm.get('rol')?.invalid && editUserForm.get('rol')?.touched">
         El rol es requerido.
       </mat-error>
     </mat-form-field>
   
-    <button mat-raised-button type="submit" color="primary">Actualizar Usuario</button>
+    <button mat-raised-button type="button" color="primary">Actualizar Usuario</button>
     <button mat-button type="button" (click)="cancel()">Cancelar</button>
   </form>
+  
   
