@@ -69,9 +69,7 @@ export class EditUserComponent implements OnInit {
         console.error('Error al obtener el usuario:', error);
       }
     });
-  }
-  
-  
+  } 
 
   private loadRoles() {
     this.authService.getRoles(this.token).subscribe({
@@ -101,6 +99,7 @@ export class EditUserComponent implements OnInit {
     this.authService.updateUser(this.userId, data, this.token).subscribe({
       next: () => {
         console.log('Usuario actualizado con éxito');
+        this.router.navigate(['/gestion_usuarios/view-user']); // Redirigir después de actualizar
       },
       error: (error) => {
         console.error('Error al actualizar el usuario:', error);
@@ -132,10 +131,16 @@ export class EditUserComponent implements OnInit {
   onSubmit() {
     if (this.editUserForm.valid) {
       const userData = this.getUpdatedFields(this.editUserForm.value);
-      console.log(userData);
-      this.updateUserData(userData);
+      if (Object.keys(userData).length === 0) {
+        alert("No has realizado ningún cambio.");
+      } else {
+        this.updateUserData(userData);
+        alert("USUARIO ACTUALIZADO CORRECTAMENTE");
+        this.router.navigate(['/gestion_usuarios/view-user']);
+      }
     } else {
       console.error("Formulario inválido. Verifica los campos.");
     }
   }
+  
 }
