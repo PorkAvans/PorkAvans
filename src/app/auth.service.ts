@@ -102,6 +102,21 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
+    //método para obtener roles desde el backend
+    getRoles(token: string): Observable<any> {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      return this.http.get<any>(`${this.apiUrl}/user_rol/roles`, { headers });
+    }
+
+  //Metodo para actualizar un usuario 
+  updateUser(id: string, data: any, token: string) {
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`,
+    });
+    return this.http.put(`${this.apiUrl}/api/update/${id}`, data, { headers });
+  }
+
+
   // Método para obtener productos del stock
   getStockProducts(): Observable<any[]> {
     return this.http.get<any[]>(`${this.apiUrl}/stock-products/stock-products`); // Asegúrate que esta es la ruta correcta

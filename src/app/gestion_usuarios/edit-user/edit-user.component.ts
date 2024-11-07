@@ -1,3 +1,4 @@
+// edit-user.component.ts
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -13,81 +14,99 @@ export class EditUserComponent implements OnInit {
   userId!: string;
   token: string = '';
   imageUrl: string | ArrayBuffer | null = '';
-  initialValues: any = {}; // Para guardar los valores iniciales del usuario
+  initialValues: any = {};
+  roles: any[] = [];  // Variable para almacenar los roles
 
   constructor(
     private fb: FormBuilder,
     private route: ActivatedRoute,
     private router: Router,
     private authService: AuthService
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.token = localStorage.getItem('access_token') || '';
     this.userId = this.route.snapshot.paramMap.get('id')!;
     this.initForm();
     this.fetchUserData();
+    this.loadRoles(); // Cargar los roles disponibles
   }
 
   private initForm() {
     this.editUserForm = this.fb.group({
-      imagen: [''],
-      nombre: ['', Validators.required],
-      celularr: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
-      correo: ['', [Validators.required, Validators.email]],
-      rol: ['', Validators.required],
-    });
-
-    // Escuchar cambios en el formulario
-    this.editUserForm.valueChanges.subscribe((changes) => {
-      const dataToSend = this.getUpdatedFields(changes);
-      this.updateUserData(dataToSend);
+      user_imagen: [''],
+      user_nombre: ['', Validators.required],
+      celular: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
+      user_email: ['', [Validators.required, Validators.email]],
+      user_rol: ['', Validators.required],
     });
   }
 
   private fetchUserData() {
     this.authService.getUsuarioPorId(this.userId, this.token).subscribe({
       next: (user) => {
+        // Asignar los valores correctamente al formulario
         this.editUserForm.patchValue({
-          imagen: user.imagen,
-          nombre: user.nombre,
-          celularr: user.celular,
-          correo: user.correo,
-          rol: user.user_rol,
+          user_imagen: user.imagen || '',
+          user_nombre: user.nombre || '',
+          celular: user.celular || '',
+          user_email: user.correo || '',
+          user_rol: user.user_rol || ''  // Asegúrate de que user_rol_id es el valor correcto
         });
-        this.imageUrl = 'data:image/jpeg;base64,' + user.imagen;
-
-        // Guardar los valores iniciales
-        this.initialValues = this.editUserForm.value;
+  
+        this.imageUrl = user.imagen ? 'data:image/jpeg;base64,' + user.imagen : '';
+  
+        // Guardar los valores iniciales para compararlos luego
+        this.initialValues = {
+          user_imagen: user.imagen,
+          user_nombre: user.nombre,
+          celular: user.celular,
+          user_email: user.correo,
+          user_rol: user.user_rol // Guardamos el ID del rol
+        };
       },
       error: (error) => {
         console.error('Error al obtener el usuario:', error);
       }
     });
   }
+  
+  
+
+  private loadRoles() {
+    this.authService.getRoles(this.token).subscribe({
+      next: (roles) => {
+        this.roles = roles; // Almacena los roles obtenidos para el desplegable
+      },
+      error: (error) => {
+        console.error('Error al obtener los roles:', error);
+      }
+    });
+  }
 
   private getUpdatedFields(currentValues: any): any {
-    // Comparar los valores iniciales con los valores actuales para detectar cambios
     const updatedFields: any = {};
 
-    Object.keys(this.initialValues).forEach((key) => {
-      updatedFields[key] = currentValues[key] !== this.initialValues[key] ? currentValues[key] : null;
+    Object.keys(currentValues).forEach((key) => {
+      if (currentValues[key] !== this.initialValues[key]) {
+        updatedFields[key] = currentValues[key];
+      }
     });
 
     return updatedFields;
   }
 
   private updateUserData(data: any) {
-    // this.authService.updateUser(this.userId, data, this.token).subscribe({
-    //     next: () => {
-    //         console.log('Usuario actualizado con éxito');
-    //     },
-    //     error: (error) => {
-    //         console.error('Error al actualizar el usuario:', error);
-    //     }
-    // });
-}
-
+    console.log("Datos a enviar:", data);
+    this.authService.updateUser(this.userId, data, this.token).subscribe({
+      next: () => {
+        console.log('Usuario actualizado con éxito');
+      },
+      error: (error) => {
+        console.error('Error al actualizar el usuario:', error);
+      }
+    });
+  }
 
   cancel() {
     this.router.navigate(['/gestion_usuarios/view-user']);
@@ -103,17 +122,20 @@ export class EditUserComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.imageUrl = reader.result as string;
-        this.editUserForm.get('imagen')?.setValue(this.imageUrl);
+        const base64String = (this.imageUrl).split(',')[1];
+        this.editUserForm.get('user_imagen')?.setValue(base64String);
       };
       reader.readAsDataURL(this.fileImage);
     }
   }
 
   onSubmit() {
-    // if (this.editUserForm.valid) {
-    //     const userData = this.editUserForm.value; // Obtiene los datos del formulario
-    //     this.updateUserData(userData); // Llama al método para actualizar los datos
-    // }
-}
-
+    if (this.editUserForm.valid) {
+      const userData = this.getUpdatedFields(this.editUserForm.value);
+      console.log(userData);
+      this.updateUserData(userData);
+    } else {
+      console.error("Formulario inválido. Verifica los campos.");
+    }
+  }
 }

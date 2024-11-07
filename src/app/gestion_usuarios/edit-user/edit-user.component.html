@@ -17,46 +17,53 @@
   <form [formGroup]="editUserForm">
     <div class="image-upload-container">
       <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagen del usuario" class="image-preview" />
-      <input type="file" id="file-input" (change)="onFileSelected($event)" accept="image/*" class="file-input" />
+      <input type="file" id="file-input"  (change)="onFileSelected($event)" accept="image/*" class="file-input" />
       <label class="file-input-label" for="file-input">Seleccionar imagen</label>
     </div>
   
     <mat-form-field appearance="fill">
       <mat-label>Nombre</mat-label>
-      <input matInput formControlName="nombre" placeholder="Ingresa el nombre" />
-      <mat-error *ngIf="editUserForm.get('nombre')?.invalid && editUserForm.get('nombre')?.touched">
+      <input matInput formControlName="user_nombre" placeholder="Ingresa el nombre" />
+      <mat-error *ngIf="editUserForm.get('user_nombre')?.invalid && editUserForm.get('user_nombre')?.touched">
         El nombre es requerido.
       </mat-error>
     </mat-form-field>
   
     <mat-form-field appearance="fill">
       <mat-label>Número de Celular</mat-label>
-      <input matInput formControlName="celularr" placeholder="Ingresa el número de celular" />
-      <mat-error *ngIf="editUserForm.get('celularr')?.invalid && editUserForm.get('celularr')?.touched">
+      <input matInput formControlName="celular" placeholder="Ingresa el número de celular" />
+      <mat-error *ngIf="editUserForm.get('celular')?.invalid && editUserForm.get('celular')?.touched">
         El celular es requerido y debe ser numérico.
       </mat-error>
     </mat-form-field>
   
     <mat-form-field appearance="fill">
       <mat-label>Correo Electrónico</mat-label>
-      <input matInput formControlName="correo" placeholder="Ingresa el correo" />
-      <mat-error *ngIf="editUserForm.get('correo')?.invalid && editUserForm.get('correo')?.touched">
+      <input matInput formControlName="user_email" placeholder="Ingresa el correo" />
+      <mat-error *ngIf="editUserForm.get('user_email')?.invalid && editUserForm.get('user_email')?.touched">
         Debe ser un correo válido.
       </mat-error>
     </mat-form-field>
   
     <mat-form-field appearance="fill">
       <mat-label>Rol</mat-label>
-      <mat-select formControlName="rol">
-        <mat-option value="ADMINISTRADOR">Administrador</mat-option>
-        <mat-option value="EMPLEADO">Empleado</mat-option>
+      <mat-select formControlName="user_rol">
+        <mat-option *ngFor="let rol of roles" [value]="rol.user_rol_id">
+          {{ rol.rol }}
+        </mat-option>
       </mat-select>
-      <mat-error *ngIf="editUserForm.get('rol')?.invalid && editUserForm.get('rol')?.touched">
+      <mat-error *ngIf="editUserForm.get('user_rol')?.invalid && editUserForm.get('user_rol')?.touched">
         El rol es requerido.
       </mat-error>
     </mat-form-field>
+    
+    
+    
+    
   
-    <button mat-raised-button type="button" color="primary">Actualizar Usuario</button>
+    <button mat-raised-button type="button" color="primary" (click)="onSubmit()" [disabled]="editUserForm.invalid">
+      Actualizar Usuario
+    </button>    
     <button mat-button type="button" (click)="cancel()">Cancelar</button>
   </form>
   
