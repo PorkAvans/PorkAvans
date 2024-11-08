@@ -136,6 +136,10 @@ export class AuthService {
     );
   }
 
+  createUser(formData: FormData, token: string): Observable<any> {
+    return this.http.post(`${this.apiUrl}/api/insert`, formData);
+  }
+
   // Nuevo método para obtener la comida suministrada
   public getComidaSuministrada(): Observable<ComidaSuministradaResponse> {
     return this.http.get<ComidaSuministradaResponse>(`${this.apiUrl}/comida-suministrada/comida-suministrada`).pipe(

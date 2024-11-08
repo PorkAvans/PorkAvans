@@ -1,26 +1,26 @@
 <app-side-bar></app-side-bar>
 <section class="page-content">
   <section class="search-and-user">
-      <div class="banner">
-          <p style="align-items: center;">Editar Usuario</p>
-      </div>
+    <div class="banner">
+      <p style="align-items: center;">Editar Usuario</p>
+    </div>
 
-      <div class="admin-profile">
-          <span class="greeting">Hello admin</span>
-          <div class="notifications">
-              <svg>
-                  <use xlink:href="#users"></use>
-              </svg>
-          </div>
+    <div class="admin-profile">
+      <span class="greeting">Hello admin</span>
+      <div class="notifications">
+        <svg>
+          <use xlink:href="#users"></use>
+        </svg>
       </div>
+    </div>
   </section>
   <form [formGroup]="editUserForm">
     <div class="image-upload-container">
       <img *ngIf="imageUrl" [src]="imageUrl" alt="Imagen del usuario" class="image-preview" />
-      <input type="file" id="file-input"  (change)="onFileSelected($event)" accept="image/*" class="file-input" />
+      <input type="file" id="file-input" (change)="onFileSelected($event)" accept="image/*" class="file-input" />
       <label class="file-input-label" for="file-input">Seleccionar imagen</label>
     </div>
-  
+
     <mat-form-field appearance="fill">
       <mat-label>Nombre</mat-label>
       <input matInput formControlName="user_nombre" placeholder="Ingresa el nombre" />
@@ -28,7 +28,7 @@
         El nombre es requerido.
       </mat-error>
     </mat-form-field>
-  
+
     <mat-form-field appearance="fill">
       <mat-label>Número de Celular</mat-label>
       <input matInput formControlName="celular" placeholder="Ingresa el número de celular" />
@@ -36,7 +36,7 @@
         El celular es requerido y debe ser numérico.
       </mat-error>
     </mat-form-field>
-  
+
     <mat-form-field appearance="fill">
       <mat-label>Correo Electrónico</mat-label>
       <input matInput formControlName="user_email" placeholder="Ingresa el correo" />
@@ -44,7 +44,7 @@
         Debe ser un correo válido.
       </mat-error>
     </mat-form-field>
-  
+
     <mat-form-field appearance="fill">
       <mat-label>Rol</mat-label>
       <mat-select formControlName="user_rol">
@@ -56,11 +56,9 @@
         El rol es requerido.
       </mat-error>
     </mat-form-field>
-    
+
     <button mat-raised-button type="button" color="primary" (click)="onSubmit()" [disabled]="editUserForm.invalid">
       Actualizar Usuario
-    </button>    
+    </button>
     <button mat-button type="button" (click)="cancel()">Cancelar</button>
   </form>
-  
-  

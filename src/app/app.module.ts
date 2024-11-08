@@ -41,8 +41,7 @@ import { MatSortModule } from '@angular/material/sort';
     ComidaSuministradaComponent,
     ModalComidaSuministradaComponent,
     StockComponent,
-    ViewUserComponent,
-    AddUserComponent
+    ViewUserComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,339 @@
+// estilos principales
+body {
+    display: grid;
+    grid-template-columns: var(--sidebar-width) 1fr;
+    /* Definir el ancho del sidebar y del contenido */
+    grid-template-rows: auto;
+    /* Filas automáticas */
+    min-height: 100vh;
+    /* Asegurar que ocupe el alto total de la pantalla */
+}
+
+app-side-bar {
+    grid-column: 1;
+    /* Sidebar ocupará la primera columna */
+    width: var(--sidebar-width);
+    /* Asegurar que el sidebar tenga un ancho fijo */
+}
+
+.page-content {
+    position: relative;
+    left: var(--page-header-width);
+    width: calc(100% - var(--page-header-width));
+    min-height: 100vh;
+    padding: 30px;
+    color: var(--page-content-txtColor);
+    background: var(--page-content-bgColor);
+    padding-left: 180px;
+}
+
+.search-and-user {
+    display: grid;
+    grid-template-columns: 2fr auto;
+    grid-column-gap: 50px;
+    align-items: center;
+    background: var(--page-content-bgColor);
+    margin-bottom: 30px;
+}
+
+.search-and-user form {
+    position: relative;
+}
+
+.search-and-user [type="search"] {
+    width: 100%;
+    height: 50px;
+    font-size: 1.5rem;
+    padding-left: 15px;
+    background: var(--page-content-blockColor);
+    color: var(--white);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.search-and-user ::placeholder {
+    color: var(--page-content-txtColor);
+}
+
+.search-and-user form svg {
+    width: 26px;
+    height: 26px;
+    fill: var(--page-content-txtColor);
+}
+
+.search-and-user form button {
+    position: absolute;
+    top: 50%;
+    right: 15px;
+    transform: translateY(-50%);
+}
+
+.search-and-user .admin-profile {
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    border: solid;
+
+}
+
+.search-and-user .admin-profile .greeting {
+    margin: 0 10px 0 20px;
+}
+
+.search-and-user .admin-profile svg {
+    width: 30px;
+    height: 30px;
+}
+
+.search-and-user .admin-profile .notifications {
+    position: relative;
+}
+
+.search-and-user .admin-profile .badge {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    top: -10px;
+    right: -3px;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    font-size: 10px;
+    color: var(--white);
+    background: var(--blue);
+}
+
+.banner {
+    position: relative;
+    top: 7px;
+    left: 180px;
+    width: 81%;
+    background-color: #242e42;
+    color: white;
+    text-align: center;
+    z-index: 1000;
+    display: flex;
+    justify-content: center;
+    /* Cambiado a center */
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 10px;
+    margin: 0;
+}
+
+.banner p {
+    margin: 0;
+}
+
+.container {
+    display: flex;
+    justify-content: flex-start;
+    /* Centra horizontalmente */
+    border-radius: 10px;
+    flex-direction: column;
+    /* Asegura que los elementos se coloquen en una columna */
+    align-items: flex-start;
+    /* Alinea los elementos al inicio del contenedor (izquierda) */
+    padding: 30px;
+    /* Espaciado interno opcional si necesitas */
+    position: relative;
+    /* Para el posicionamiento absoluto de la búsqueda */
+
+    // position: fixed; /* Fija el contenedor en la posición especificada */
+    top: 0;
+    /* Posición superior */
+    // left: 0; /* Posición izquierda */
+    width: 100%;
+    /* Ancho completo de la ventana */
+    padding: 30px;
+    /* Espaciado interno opcional */
+    // background-color: #fff; /* Fondo blanco para el contenedor */
+    // z-index: 1000; /* Asegura que esté sobre otros elementos */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    /* Opcional: sombra para un efecto de profundidad */
+}
+
+// .search-container {
+//     display: flex;
+//     justify-content: space-between;
+//     margin-bottom: 30px;
+//     width: 100%;
+// }
+
+.grid .container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 1rem;
+}
+
+@media (min-width: 1400px) {
+
+    .container-xxl,
+    .container-xl,
+    .container-lg,
+    .container-md,
+    .container-sm,
+    .container {
+        max-width: 100%;
+    }
+}
+
+//---------------------------------//
+
+/* General */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f7fc;
+    color: #333;
+  }
+  
+  /* Contenedor Principal */
+  
+  .container {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+  }
+  
+  /* Sidebar */
+  app-side-bar {
+    flex: 1;
+    max-width: 250px;
+    margin-right: 20px;
+  }
+  
+  /* Sección de Banners */
+  .search-and-user .banner {
+    background-color: #4CAF50;
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 1.2em;
+  }
+  
+  .admin-profile {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 10px;
+  }
+  
+  .admin-profile .greeting {
+    font-size: 1.1em;
+    font-weight: bold;
+  }
+  
+  .admin-profile .notifications {
+    cursor: pointer;
+  }
+  
+  /* Formulario */
+  form {
+    width: 100%;
+    background-color: white;
+    border-radius: 8px;
+    padding: 30px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+  }
+  
+  mat-form-field {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+  
+  /* Imagen de Usuario */
+  .image-upload-container {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  .image-preview {
+    max-width: 150px;
+    max-height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+  
+  .file-input {
+    display: none;
+  }
+  
+  .file-input-label {
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 10px;
+  }
+  
+  .file-input-label:hover {
+    background-color: #45a049;
+  }
+  
+  /* Botones */
+  button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 5px;
+    font-size: 1.1em;
+    margin-top: 15px;
+  }
+  
+  button[type='submit'] {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+  }
+  
+  button[type='submit']:hover {
+    background-color: #45a049;
+  }
+  
+  button[type='button'] {
+    background-color: #f44336;
+    color: white;
+    border: none;
+  }
+  
+  button[type='button']:hover {
+    background-color: #e53935;
+  }
+  
+  /* Mat-Select */
+  mat-select {
+    width: 100%;
+    padding: 10px;
+  }
+  
+  /* Mensajes de Error */
+  mat-error {
+    color: #f44336;
+    font-size: 0.9em;
+  }
+  
+  /* Responsive Design */
+  @media (max-width: 768px) {
+    .container {
+      flex-direction: column;
+    }
+  
+    app-side-bar {
+      margin-right: 0;
+      margin-bottom: 20px;
+    }
+    
+    form {
+      padding: 20px;
+    }
+  }
+  

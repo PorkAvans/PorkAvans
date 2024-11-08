@@ -9,10 +9,12 @@ import { SharedModule } from '../../shared/shared.module';
 
 import { GestionUsuariosRoutingModule } from './gestion-usuarios-routing.module';
 import { EditUserComponent } from './edit-user/edit-user.component';  // Asegúrate de importar tu componente
+import { AddUserComponent } from './add-user/add-user.component';
 
 @NgModule({
   declarations: [
-    EditUserComponent  // Declara tu componente aquí
+    EditUserComponent,  // Declara tu componente aquí
+    AddUserComponent
   ],
   imports: [
     CommonModule,

@@ -90,9 +90,12 @@ export class ViewUserComponent implements OnInit {
         console.error('Token no encontrado');
       }
     } else {
-      // Si el usuario cancela, puedes manejarlo aquí (opcional)
       console.log('Cambio de estado cancelado');
     }
+  }
+
+  addUser(): void {
+    this.router.navigate(['/gestion_usuarios/add-user']);
   }
 
 
