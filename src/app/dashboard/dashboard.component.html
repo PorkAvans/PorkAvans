@@ -1,5 +1,5 @@
 <app-side-bar></app-side-bar>
-<body>      
+<body *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'EMPLEADO'">      
       <section class="page-content">
             <section class="search-and-user">
                   <div class="banner">

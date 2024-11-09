@@ -23,10 +23,12 @@ export class DashboardComponent implements OnInit {
   cardData: CardData[] = [];  // Variable para almacenar los datos de las tarjetas
   grafData: GrafData[] = [];  // Variable para almacenar los datos del gráfico
   productosData: Producto[] = [];  // Variable para almacenar los datos de productos
+  userRole: string = '';  // Agregar propiedad para el rol
 
 
   constructor(private router: Router, private authService: AuthService) {
     const token = localStorage.getItem('access_token');
+    this.getUserRole(); 
     if (!token) {
       this.router.navigate(['/login']).then(() => {
         // Puedes agregar alguna acción aquí si es necesario
@@ -35,7 +37,17 @@ export class DashboardComponent implements OnInit {
         console.error('Error durante la navegación:', error);
       });
     }
+    
   }
+
+  
+  getUserRole() {
+    const role = localStorage.getItem('user_rol');  // Suponiendo que el rol está guardado en el localStorage
+    console.log(this.userRole);
+    this.userRole = role ? role : '';  // Si no hay rol, asignar un valor por defecto
+    
+  }
+
 
   ngOnInit(): void {
     this.authService.getGrafica().subscribe(

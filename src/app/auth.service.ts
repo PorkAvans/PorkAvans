@@ -183,6 +183,33 @@ createUser(userData: any, token: string): Observable<any> {
     );
   }
 
+    // Método para almacenar token y rol en el localStorage
+    public storeUserData(token: string, role: string, userEstado: string): void {
+      localStorage.setItem('access_token', token);
+      localStorage.setItem('user_rol', role);
+      localStorage.setItem('user_estado', userEstado);
+    }
+  
+    // Método para obtener el token almacenado
+    public getToken(): string | null {
+      return localStorage.getItem('access_token');
+    }
+  
+    // Método para verificar si el usuario está autenticado
+    public isAuthenticated(): boolean {
+      return this.getToken() !== null;
+    }
+  
+    // Método para obtener el rol del usuario almacenado
+    public getUserRole(): string | null {
+      return localStorage.getItem('user_rol');
+    }
+  
+    // Método para obtener el estado del usuario almacenado
+    public getUserStatus(): string | null {
+      return localStorage.getItem('user_estado');
+    }
+
   public getUsuarios(): Observable<{ total_users: number }> {
     return this.http.get<{ total_users: number }>(`${this.apiUrl}/dashboard/total_users`).pipe(
       catchError(error => {

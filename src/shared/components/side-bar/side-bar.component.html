@@ -156,7 +156,7 @@
             <li class="menu-heading">
                 <h3>Menu</h3>
             </li>
-            <li>
+            <li *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'EMPLEADO'">
                 <button (click)="navigateToDashboard()" class="sidebar-button">
                     <svg>
                         <use xlink:href="#pages"></use>
@@ -165,7 +165,7 @@
                 </button>
             </li>
 
-            <li>
+            <li *ngIf="userRole === 'ADMINISTRADOR'">
                 <button (click)="toggleUserSubmenu()"class="sidebar-button">
                     <svg>
                         <use xlink:href="#users"></use>
@@ -204,7 +204,7 @@
                 </ul>
             </li>
            
-            <li>
+            <li *ngIf="userRole === 'ADMINISTRADOR'">
                 <button (click)="navigateTocollection()" class="sidebar-button">
                     <svg>
                         <use xlink:href="#collection"></use>
@@ -215,7 +215,7 @@
             <li class="menu-heading">
                 <h3>Settings</h3>
             </li>
-            <li>
+            <li *ngIf="userRole === 'ADMINISTRADOR'">
                 <a href="#0">
                     <svg>
                         <use xlink:href="#settings"></use>

@@ -15,8 +15,16 @@ export class SideBarComponent {
   isTrendsSubmenuOpen = false;
   isUsersSubmenuOpen = false;
   isCollapsed = false;  
+  userRole: string = '';  // Agregar propiedad para el rol
 
-  constructor(private router: Router) { }
+  constructor(private router: Router) { 
+    this.getUserRole();  // Obtener el rol del usuario al iniciar el componente
+  }
+
+  getUserRole() {
+    const role = localStorage.getItem('user_rol');  // Suponiendo que el rol está guardado en el localStorage
+    this.userRole = role ? role : '';  // Si no hay rol, asignar un valor por defecto
+  }
 
   toggleCollapse() {
     this.isCollapsed = !this.isCollapsed;  // Alterna el estado colapsado
