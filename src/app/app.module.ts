@@ -25,7 +25,6 @@ import { StockComponent } from './stock-products/stock-products.component';
 import { DatePipe } from '@angular/common';
 import { ViewUserComponent } from './gestion_usuarios/view-user/view-user.component';
 
-import { AddUserComponent } from './gestion_usuarios/add-user/add-user.component'; // Importar DatePipe
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';

@@ -136,9 +136,12 @@ export class AuthService {
     );
   }
 
-  createUser(formData: FormData, token: string): Observable<any> {
-    return this.http.post(`${this.apiUrl}/api/insert`, formData);
-  }
+  // auth.service.ts
+createUser(userData: any, token: string): Observable<any> {
+  const headers = { Authorization: `Bearer ${token}` }; // Agrega el token de autorización si es necesario
+  return this.http.post(`${this.apiUrl}/api/insert`, userData, { headers });
+}
+
 
   // Nuevo método para obtener la comida suministrada
   public getComidaSuministrada(): Observable<ComidaSuministradaResponse> {

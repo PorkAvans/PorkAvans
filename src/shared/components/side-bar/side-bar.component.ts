@@ -14,7 +14,7 @@ export class SideBarComponent {
 
   isTrendsSubmenuOpen = false;
   isUsersSubmenuOpen = false;
-  isCollapsed = false;  // Variable para manejar si el menú está colapsado o no
+  isCollapsed = false;  
 
   constructor(private router: Router) { }
 
@@ -29,6 +29,8 @@ export class SideBarComponent {
   toggleUserSubmenu() {
     this.isUsersSubmenuOpen = !this.isUsersSubmenuOpen;
   }
+
+  
 
   navigateToComidaSuministrada() {
 
@@ -58,7 +60,21 @@ export class SideBarComponent {
       });
   }
 
-  navigateToViewuser(){
+  navigateToViewAdministrador() {
+    this.router.navigate(['/gestion-distribuidores/view-administrador'])
+      .then(() => {
+        // Puedes agregar alguna acción aquí si es necesario
+        console.log('Navegación a /view-administrador.');
+        this.isTrendsSubmenuOpen = false;  // Cierra el submenú
+      })
+      .catch(error => {
+        // Manejo de errores si la navegación falla
+        console.error('Error durante la navegación:', error);
+      });
+  }
+  
+
+  navigateToViewuser() {
     this.router.navigate(['/gestion_usuarios/view-user'])
       .then(() => {
         // Puedes agregar alguna acción aquí si es necesario

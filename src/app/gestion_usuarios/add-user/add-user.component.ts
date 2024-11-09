@@ -13,12 +13,13 @@ export class AddUserComponent implements OnInit {
   token: string = '';
   imageUrl: string | ArrayBuffer | null = '';
   roles: any[] = [];
+  fileImage: File | null = null;
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private authService: AuthService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.token = localStorage.getItem('access_token') || '';
@@ -33,8 +34,7 @@ export class AddUserComponent implements OnInit {
       user_password: ['', Validators.required],
       celular: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       user_email: ['', [Validators.required, Validators.email]],
-      user_rol: ['', Validators.required],
-      estado: ['', Validators.required],
+      user_rol: ['', Validators.required]
     });
   }
 
@@ -49,8 +49,6 @@ export class AddUserComponent implements OnInit {
     });
   }
 
-  fileImage: File | null = null;
-
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files[0]) {
@@ -59,7 +57,7 @@ export class AddUserComponent implements OnInit {
       const reader = new FileReader();
       reader.onload = () => {
         this.imageUrl = reader.result as string;
-        const base64String = (this.imageUrl).split(',')[1];
+        const base64String = (this.imageUrl as string).split(',')[1];
         this.addUserForm.get('user_imagen')?.setValue(base64String);
       };
       reader.readAsDataURL(this.fileImage);
@@ -67,6 +65,7 @@ export class AddUserComponent implements OnInit {
   }
 
   onSubmit() {
+    console.log("Formulario enviado"); // Verifica que este mensaje aparezca en la consola
     if (this.addUserForm.valid) {
       const userData = this.addUserForm.value;
       this.authService.createUser(userData, this.token).subscribe({
@@ -82,6 +81,7 @@ export class AddUserComponent implements OnInit {
       console.error("Formulario inválido. Verifica los campos.");
     }
   }
+  
 
   cancel() {
     this.router.navigate(['/gestion_usuarios/view-user']);
