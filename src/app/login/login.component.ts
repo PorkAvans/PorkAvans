@@ -24,7 +24,7 @@ export class LoginComponent {
 
   onSubmit() {
     this.authService.login(this.username, this.password).subscribe({
-      next: (response: AuthResponse) => {  
+      next: (response: AuthResponse) => {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('user_estado', response.user_estado);
 
@@ -48,4 +48,8 @@ export class LoginComponent {
       duration: 3000,
     });
   }
+  navigateToRegister() {
+    this.router.navigateByUrl("/add-afiliado");
+  }
+
 }

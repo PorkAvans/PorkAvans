@@ -1,0 +1,66 @@
+<div class="container">
+    <div class="card">
+        <h3>Conviértete en Afiliado</h3>
+        <p>¡Únete a nuestro programa de afiliados y comienza a ganar comisiones por recomendar nuestros productos!
+            Regístrate hoy mismo, recibe un enlace único para compartir y empieza a obtener ingresos cada vez que
+            alguien realice una compra a través de tu enlace.</p>
+        <div class="icon">
+            <!-- Aquí irá el SVG del dólar animado -->
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="50" height="50">
+                <text x="50%" y="50%" font-size="50" text-anchor="middle" fill="green" dy=".3em">$</text>
+                <!-- <animateTransform attributeName="transform" type="rotate" from="0 50 50" to="360 50 50" dur="3s" repeatCount="indefinite"/> -->
+            </svg>
+        </div>
+    </div>
+
+
+
+    <form (ngSubmit)="onSubmit()" [formGroup]="addAfiliadoForm">
+        <div class="image-upload">
+            <label for="user_imagen">Imagen del Afiliado:</label>
+            <div class="image-container">
+                <img *ngIf="imageUrl" [src]="imageUrl" alt="Vista previa de imagen" />
+            </div>
+            <input type="file" (change)="onFileSelected($event)" id="user_imagen" />
+        </div>
+
+
+        <div>
+            <label for="user_nombre">Nombre:</label>
+            <input type="text" id="user_nombre" formControlName="user_nombre" required />
+        </div>
+
+        <div>
+            <label for="user_password">Contraseña:</label>
+            <input type="password" id="user_password" formControlName="user_password" required />
+        </div>
+
+        <div>
+            <label for="celular">Celular:</label>
+            <input type="text" id="celular" formControlName="celular" required />
+        </div>
+
+        <div>
+            <label for="user_email">Email:</label>
+            <input type="email" id="user_email" formControlName="user_email" required />
+        </div>
+
+        <!-- <div>
+      <label for="user_rol">Rol:</label>
+      <select id="user_rol" formControlName="user_rol" required>
+        <option *ngFor="let role of roles" [value]="role.id">{{ role.name }}</option>
+      </select>
+    </div>
+  
+    <div>
+      <label for="user_estado">Estado:</label>
+      <select id="user_estado" formControlName="user_estado" required>
+        <option value="activo">Activo</option>
+        <option value="inactivo">Inactivo</option>
+      </select>
+    </div> -->
+
+        <button type="submit">Agregar Afiliado</button>
+        <button type="button" (click)="cancel()">Cancelar</button>
+    </form>
+</div>

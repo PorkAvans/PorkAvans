@@ -24,6 +24,7 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { StockComponent } from './stock-products/stock-products.component';
 import { DatePipe } from '@angular/common';
 import { ViewUserComponent } from './gestion_usuarios/view-user/view-user.component';
+import { GestionAfiliadoModule } from './gestion_afiliado/gestion-afiliado.module';
 
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
@@ -59,6 +60,7 @@ import { MatSortModule } from '@angular/material/sort';
     SharedModule,
     MatTableModule,
     MatPaginatorModule,
+    GestionAfiliadoModule,
     MatSortModule 
   ],
   providers: [DatePipe], // Agrega DatePipe como proveedor

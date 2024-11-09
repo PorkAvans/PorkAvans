@@ -1,0 +1,318 @@
+form {
+    max-width: 600px;
+    margin-left: auto;   /* Esto mueve el formulario a la derecha */
+    margin-right: 0;   
+    margin-top: 60px; 
+    padding: 20px;
+    background-color: #bd82d4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+// form {
+//     max-width: 600px;
+//     margin-left: auto;   /* Esto mueve el formulario a la derecha */
+//     margin-right: 0;     /* Elimina cualquier margen a la derecha */
+//     padding: 20px;
+//     background-color: #bd82d4;
+//     border-radius: 8px;
+//     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+// }
+
+
+h2 {
+    text-align: center;
+    color: #333;
+    font-size: 24px;
+    margin-bottom: 20px;
+}
+
+//   div {
+//     margin-bottom: 15px;
+//   }
+
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+select,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    margin-bottom: 8px;
+    background-color: #bb7f7f;
+}
+
+input[type="file"] {
+    padding: 5px;
+}
+
+button {
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: #4CAF50;
+    color: white;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #45a049;
+    }
+}
+
+button[type="button"] {
+    background-color: #f44336;
+    margin-left: 10px;
+
+    &:hover {
+        background-color: #e53935;
+    }
+}
+
+img {
+    width: 120px;
+    height: 120px;
+    object-fit: cover;
+    border-radius: 50%;
+    border: 2px solid #ddd;
+    margin-bottom: 10px;
+}
+
+.image-upload {
+    text-align: center;
+}
+
+.image-container {
+    display: inline-block;
+    width: 120px;
+    height: 120px;
+    margin-bottom: 10px;
+}
+
+input[type="file"] {
+    display: block;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+select {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+select:focus {
+    outline: none;
+    border-color: #4CAF50;
+}
+
+button:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(76, 175, 80, 0.6);
+}
+
+form .actions {
+    display: flex;
+    justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    form {
+        padding: 15px;
+    }
+
+    button {
+        width: 100%;
+        margin-top: 10px;
+    }
+
+    .actions {
+        flex-direction: column;
+    }
+
+    button[type="button"] {
+        margin-top: 10px;
+    }
+}
+
+
+/* Contenedor del botón y la imagen */
+.image-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 30px;
+    font-family: 'Arial', sans-serif;
+}
+
+/* Contenedor de la imagen con bordes circulares */
+.image-container {
+    width: 140px;
+    height: 140px;
+    border-radius: 50%;
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 4px solid #8e44ad;
+    /* Borde morado */
+    background-color: #f7f7f7;
+    /* Fondo gris claro */
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+    /* Sombra sutil */
+    margin-bottom: 20px;
+    position: relative;
+}
+
+/* Estilo de la imagen dentro del contenedor */
+.image-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Asegura que la imagen cubra completamente el círculo */
+    transition: transform 0.3s ease;
+}
+
+/* Efecto de escala para la imagen */
+.image-container img:hover {
+    transform: scale(1.1);
+    /* Aumenta el tamaño de la imagen al pasar el ratón */
+}
+
+/* Estilos para el input de archivo (lo ocultamos) */
+input[type="file"] {
+    display: none;
+    /* Ocultamos el input original de archivo */
+}
+
+/* Estilos del botón de elegir archivo */
+label[for="user_imagen"] {
+    display: inline-block;
+    background-color: #8e44ad;
+    color: white;
+    padding: 12px 25px;
+    border-radius: 30px;
+    /* Bordes más redondeados */
+    font-size: 16px;
+    cursor: pointer;
+    text-align: center;
+    font-weight: bold;
+    letter-spacing: 1px;
+    transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
+    box-shadow: 0 5px 10px rgba(142, 68, 173, 0.4);
+    margin-top: 10px;
+    text-transform: uppercase;
+    outline: none;
+}
+
+/* Efectos cuando el botón se pasa por encima */
+label[for="user_imagen"]:hover {
+    background-color: #9b59b6;
+    /* Cambio de color al pasar el ratón */
+    transform: translateY(-3px);
+    /* Desplaza el botón hacia arriba */
+    box-shadow: 0 8px 15px rgba(142, 68, 173, 0.5);
+}
+
+/* Efectos cuando el botón está siendo presionado */
+label[for="user_imagen"]:active {
+    background-color: #8e44ad;
+    transform: translateY(0);
+    /* El botón vuelve a su posición */
+    box-shadow: 0 5px 10px rgba(142, 68, 173, 0.4);
+}
+
+/* Efectos cuando el input o el label están en foco */
+input[type="file"]:focus+label[for="user_imagen"],
+label[for="user_imagen"]:focus {
+    outline: none;
+    box-shadow: 0 0 5px rgba(142, 68, 173, 0.7);
+}
+
+
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px; /* Espacio entre la tarjeta y el formulario */
+    margin-top: 60px;
+}
+
+.container::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: radial-gradient(circle, black 10%, transparent 10%);
+    background-size: 30px 30px;
+    z-index: -1;
+}
+
+.card {
+    width: 250px;
+    height: 350px;
+    background-color: #f3f3f3;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    text-align: center;
+    font-family: 'Arial', sans-serif;
+    margin-top: 215px;
+  }
+  
+  .card h3 {
+    font-size: 24px;
+    color: #333;
+    margin: 0;
+  }
+  
+  .card p {
+    font-size: 16px;
+    color: #777;
+    margin: 10px 0;
+  }
+  
+  .card .btn {
+    padding: 12px 20px;
+    background-color: #8e44ad;
+    color: white;
+    border: none;
+    border-radius: 30px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  .card .btn:hover {
+    background-color: #9b59b6;
+  }
+  
+  .card .icon {
+    margin: 20px 0;
+    font-size: 60px;
+    color: #f39c12;
+  }
+  

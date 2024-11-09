@@ -274,3 +274,23 @@ form {
     width: 100%;
   }
 }
+
+.register_button {
+  margin-top: 15px;
+  text-align: center;
+
+  button {
+    background-color: #4caf50; /* Cambia este color según tus necesidades */
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 14px;
+    border-radius: 5px;
+
+    &:hover {
+      background-color: #45a049; /* Efecto al pasar el mouse */
+    }
+  }
+}
+
