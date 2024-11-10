@@ -32,7 +32,7 @@ export class LoginComponent {
 
         if (response.user_estado === 'ACTIVO' && response.user_rol === 'AFILIADO') {
           // Si el usuario está activo y su rol es "AFILIADO", redirigir al componente add-product-sale
-          this.router.navigateByUrl("/add-product-sale").then();
+          this.router.navigateByUrl("/gestion_afiliado/add-product-sale").then();
         } else if (response.user_estado === 'ACTIVO') {
           // Si el usuario está activo pero no tiene rol "AFILIADO", redirigir a /dashboard
           this.router.navigateByUrl("/dashboard").then();

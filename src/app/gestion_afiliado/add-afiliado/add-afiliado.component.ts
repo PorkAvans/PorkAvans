@@ -34,8 +34,7 @@ export class AddAfiliadoComponent implements OnInit {
       user_password: ['', Validators.required],
       celular: ['', [Validators.required, Validators.pattern('^[0-9]*$')]],
       user_email: ['', [Validators.required, Validators.email]],
-      user_rol: ['', Validators.required],
-      user_estado: ['', Validators.required]
+      user_rol: [''] // Este campo será asignado con el valor 3 en onSubmit
     });
   }
 
@@ -69,15 +68,19 @@ export class AddAfiliadoComponent implements OnInit {
     console.log("Formulario de afiliado enviado");
     if (this.addAfiliadoForm.valid) {
       const afiliadoData = this.addAfiliadoForm.value;
-      // this.authService.createAfiliado(afiliadoData, this.token).subscribe({
-      //   next: () => {
-      //     alert("AFILIADO AGREGADO CORRECTAMENTE");
-      //     this.router.navigate(['/gestion_afiliados/view-afiliado']);
-      //   },
-      //   error: (error) => {
-      //     console.error('Error al agregar el afiliado:', error);
-      //   }
-      // });
+      
+      // Asignar el rol siempre a 3 antes de enviar los datos
+      afiliadoData.user_rol = 3;
+
+      this.authService.createUser(afiliadoData, this.token).subscribe({
+        next: () => {
+          alert("AFILIADO AGREGADO CORRECTAMENTE");
+          this.router.navigate(['/gestion_afiliados/view-afiliado']);
+        },
+        error: (error) => {
+          console.error('Error al agregar el afiliado:', error);
+        }
+      });
     } else {
       console.error("Formulario inválido. Verifica los campos.");
     }

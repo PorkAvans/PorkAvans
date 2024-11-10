@@ -7,6 +7,7 @@ import { CollectionDashboardComponent } from './collection/collection-dashboard/
 import { ComidaSuministradaComponent } from './comida-suministrada/comida-suministrada.component';
 import { StockComponent } from './stock-products/stock-products.component';
 import { AddAfiliadoComponent } from './gestion_afiliado/add-afiliado/add-afiliado.component';
+import { AddProductSaleComponent } from './gestion_afiliado/add-product-sale/add-product-sale.component';
 
 // Aquí está la modificación para la ruta de gestion-distribuidores
 const routes: Routes = [
@@ -18,6 +19,7 @@ const routes: Routes = [
   { path: 'stock-products', component: StockComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'add-afiliado', component: AddAfiliadoComponent },
+  { path: 'gestion_afiliado/add-product-sale', component: AddProductSaleComponent },
   
   // Modificación aquí
   { path: 'gestion-distribuidores', loadChildren: () => import('./gestion-distribuidores/gestion-distribuidores.module').then(m => m.GestionDistribuidoresModule) },

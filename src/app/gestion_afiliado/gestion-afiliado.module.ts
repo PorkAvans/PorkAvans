@@ -8,10 +8,13 @@ import { MatButtonModule } from '@angular/material/button';
 
 import { GestionAfiliadoRoutingModule } from './gestion-afiliado-routing.module'; // Asegúrate de que este módulo está bien configurado
 import { AddAfiliadoComponent } from './add-afiliado/add-afiliado.component';
+import { AddProductSaleComponent } from './add-product-sale/add-product-sale.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [
-    AddAfiliadoComponent // Tu componente debe estar aquí
+    AddAfiliadoComponent,
+    AddProductSaleComponent // Tu componente debe estar aquí
   ],
   imports: [
     CommonModule,
@@ -20,6 +23,7 @@ import { AddAfiliadoComponent } from './add-afiliado/add-afiliado.component';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    SharedModule,
     GestionAfiliadoRoutingModule // Aquí se deben declarar las rutas si las tienes configuradas
   ]
 })

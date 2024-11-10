@@ -184,7 +184,7 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'EMPLEADO'">
                 <button (click)="toggleTrendsSubmenu()" class="sidebar-button">
                     <svg>
                         <use xlink:href="#trends"></use>
@@ -192,6 +192,26 @@
                     <span>Trends</span>
                 </button>
                 <ul [ngClass]="{ 'submenu': true, 'show': isTrendsSubmenuOpen }">
+                    <li>
+                        <button (click)="navigateTorecoleccion()">Producto Recolectado</button>
+                    </li>
+                    <li>
+                        <button (click)="navigateToStockproductos()">Stock</button>
+                    </li>
+                    <li>
+                        <button (click)="navigateToComidaSuministrada()">Comida Suministrada</button>
+                    </li>
+                </ul>
+            </li>
+
+            <li>
+                <button  (click)="toggleAfiliadoSubmenu()"  class="sidebar-button">
+                    <svg>
+                        <use xlink:href="#afiliado"></use>
+                    </svg>
+                    <span>Afiliado</span>
+                </button>
+                <ul [ngClass]="{ 'submenu': true, 'show': isAfiliadoSubmenuOpen }">
                     <li>
                         <button (click)="navigateTorecoleccion()">Producto Recolectado</button>
                     </li>

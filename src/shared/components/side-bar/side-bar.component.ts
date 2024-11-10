@@ -13,6 +13,7 @@ import { Router } from '@angular/router';
 export class SideBarComponent {
 
   isTrendsSubmenuOpen = false;
+  isAfiliadoSubmenuOpen = false;
   isUsersSubmenuOpen = false;
   isCollapsed = false;  
   userRole: string = '';  // Agregar propiedad para el rol
@@ -32,6 +33,10 @@ export class SideBarComponent {
 
   toggleTrendsSubmenu() {
     this.isTrendsSubmenuOpen = !this.isTrendsSubmenuOpen;
+  }
+
+  toggleAfiliadoSubmenu() {
+    this.isAfiliadoSubmenuOpen = !this.isAfiliadoSubmenuOpen;
   }
 
   toggleUserSubmenu() {
