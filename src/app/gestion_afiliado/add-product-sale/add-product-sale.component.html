@@ -1,1 +1,30 @@
 <app-side-bar></app-side-bar>
+<section class="page-content">
+    <article class="container" style="width: 100%;">
+        <div *ngIf="productosPaginados && productosPaginados.length > 0" class="product-grid">
+            <div *ngFor="let producto of productosPaginados" class="product-card">
+                <h3>{{ producto.product_sale_name }}</h3>
+                <p>Precio: {{ producto.price }}</p>
+                <p>Descripción: {{ producto.product_sale_description }}</p>
+                <p>Categoría: {{ producto.product_category_sale_description }}</p>
+                <button class="promote-button" (click)="promocionarProducto(producto.product_sale_id)">Promocionar</button>
+            </div>
+        </div>
+        <div *ngIf="!productosPaginados || productosPaginados.length === 0">
+            <p>No hay productos de ventas disponibles.</p>
+        </div>
+
+        <!-- Controles de Paginación con Flechas -->
+        <div class="pagination-controls" *ngIf="totalPaginas > 1">
+            <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1">
+                &#9664; <!-- Flecha izquierda -->
+            </button>
+
+            <span>Página {{ paginaActual }} de {{ totalPaginas }}</span>
+
+            <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas">
+                &#9654; <!-- Flecha derecha -->
+            </button>
+        </div>
+    </article>
+</section>

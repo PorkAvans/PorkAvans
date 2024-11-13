@@ -67,6 +67,27 @@ interface GraficaResponse {
   graficas: GrafData[];
 }
 
+//interface de product-sale
+export interface ProductosResponse {
+  productos: Producto[]; // El array de productos dentro de un objeto
+}
+
+export interface ProductSale {
+  product_sale_id: number;
+  product_sale_name: string;
+  product_sale_description: string;
+  price: string;
+  product_category_sale_description: string;
+  product_sale_quantity: number;
+  product_sale_imagen: string; // Asumiendo que `product_sale_imagen` está en formato base64 como string
+  commission_id: number;
+  commission_description: string;
+  commission_value: number;
+  commission_type_id: number;
+  commission_type_description: string;
+}
+
+
 // Definición de la interfaz para un producto
 export interface Producto {
   nombre_producto: string;
@@ -75,9 +96,13 @@ export interface Producto {
 }
 
 // Definición de la interfaz para la respuesta que contiene productos
-export interface ProductosResponse {
-  productos: Producto[];
+export interface Producto {
+  product_name: string;
+  product_description: string;
+  price: number;
+  description_category: string;
 }
+
 
 export interface ProductoRecolectado {
   user: string;
@@ -102,11 +127,11 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-    //método para obtener roles desde el backend
-    getRoles(token: string): Observable<any> {
-      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
-      return this.http.get<any>(`${this.apiUrl}/user_rol/roles`, { headers });
-    }
+  //método para obtener roles desde el backend
+  getRoles(token: string): Observable<any> {
+    const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+    return this.http.get<any>(`${this.apiUrl}/user_rol/roles`, { headers });
+  }
 
   //Metodo para actualizar un usuario 
   updateUser(id: string, data: any, token: string) {
@@ -116,6 +141,16 @@ export class AuthService {
     return this.http.put(`${this.apiUrl}/api/update/${id}`, data, { headers });
   }
 
+  //metodo para obtener los productos en venta 
+  public getProductsSales(): Observable<ProductSale[]> {
+    return this.http.get<ProductSale[]>(`${this.apiUrl}/products-sales/products-sales`).pipe(
+      catchError(error => {
+        console.error('Error al obtener las ventas de productos', error);
+        return throwError(error);
+      })
+    );
+  }
+  
 
   // Método para obtener productos del stock
   getStockProducts(): Observable<any[]> {
@@ -137,10 +172,10 @@ export class AuthService {
   }
 
   // auth.service.ts
-createUser(userData: any, token: string): Observable<any> {
-  const headers = { Authorization: `Bearer ${token}` }; // Agrega el token de autorización si es necesario
-  return this.http.post(`${this.apiUrl}/api/insert`, userData, { headers });
-}
+  createUser(userData: any, token: string): Observable<any> {
+    const headers = { Authorization: `Bearer ${token}` }; // Agrega el token de autorización si es necesario
+    return this.http.post(`${this.apiUrl}/api/insert`, userData, { headers });
+  }
 
 
   // Nuevo método para obtener la comida suministrada
@@ -183,32 +218,32 @@ createUser(userData: any, token: string): Observable<any> {
     );
   }
 
-    // Método para almacenar token y rol en el localStorage
-    public storeUserData(token: string, role: string, userEstado: string): void {
-      localStorage.setItem('access_token', token);
-      localStorage.setItem('user_rol', role);
-      localStorage.setItem('user_estado', userEstado);
-    }
-  
-    // Método para obtener el token almacenado
-    public getToken(): string | null {
-      return localStorage.getItem('access_token');
-    }
-  
-    // Método para verificar si el usuario está autenticado
-    public isAuthenticated(): boolean {
-      return this.getToken() !== null;
-    }
-  
-    // Método para obtener el rol del usuario almacenado
-    public getUserRole(): string | null {
-      return localStorage.getItem('user_rol');
-    }
-  
-    // Método para obtener el estado del usuario almacenado
-    public getUserStatus(): string | null {
-      return localStorage.getItem('user_estado');
-    }
+  // Método para almacenar token y rol en el localStorage
+  public storeUserData(token: string, role: string, userEstado: string): void {
+    localStorage.setItem('access_token', token);
+    localStorage.setItem('user_rol', role);
+    localStorage.setItem('user_estado', userEstado);
+  }
+
+  // Método para obtener el token almacenado
+  public getToken(): string | null {
+    return localStorage.getItem('access_token');
+  }
+
+  // Método para verificar si el usuario está autenticado
+  public isAuthenticated(): boolean {
+    return this.getToken() !== null;
+  }
+
+  // Método para obtener el rol del usuario almacenado
+  public getUserRole(): string | null {
+    return localStorage.getItem('user_rol');
+  }
+
+  // Método para obtener el estado del usuario almacenado
+  public getUserStatus(): string | null {
+    return localStorage.getItem('user_estado');
+  }
 
   public getUsuarios(): Observable<{ total_users: number }> {
     return this.http.get<{ total_users: number }>(`${this.apiUrl}/dashboard/total_users`).pipe(

@@ -10,11 +10,13 @@ import { GestionAfiliadoRoutingModule } from './gestion-afiliado-routing.module'
 import { AddAfiliadoComponent } from './add-afiliado/add-afiliado.component';
 import { AddProductSaleComponent } from './add-product-sale/add-product-sale.component';
 import { SharedModule } from '../../shared/shared.module';
+import { ProductSaleDescriptionComponent } from './product-sale-description/product-sale-description.component';
 
 @NgModule({
   declarations: [
     AddAfiliadoComponent,
-    AddProductSaleComponent // Tu componente debe estar aquí
+    AddProductSaleComponent,
+    ProductSaleDescriptionComponent // Tu componente debe estar aquí
   ],
   imports: [
     CommonModule,
