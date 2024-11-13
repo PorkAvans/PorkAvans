@@ -9,6 +9,7 @@ interface AuthResponse {
   token_type: string;
   user_estado: string;
   user_rol: string; // Asegúrate de que la respuesta incluya este campo
+  user_id: string;
 }
 
 @Component({
@@ -29,6 +30,8 @@ export class LoginComponent {
         localStorage.setItem('access_token', response.access_token);
         localStorage.setItem('user_estado', response.user_estado);
         localStorage.setItem('user_rol', response.user_rol); // Guardar el rol
+        localStorage.setItem('user_id', response.user_id); // Guardar el rol
+
 
         if (response.user_estado === 'ACTIVO' && response.user_rol === 'AFILIADO') {
           // Si el usuario está activo y su rol es "AFILIADO", redirigir al componente add-product-sale

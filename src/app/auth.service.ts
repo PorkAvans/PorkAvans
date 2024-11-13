@@ -127,6 +127,12 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
+  //metodo para obtener infromaciond e un solo producto
+
+  getProductSaleById(productSaleId: number): Observable<ProductSale> {
+    return this.http.get<ProductSale>(`${this.apiUrl}/products-sales/get-product-sale-by-id?product_sale_id=${productSaleId}`);
+  }
+
   //método para obtener roles desde el backend
   getRoles(token: string): Observable<any> {
     const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);

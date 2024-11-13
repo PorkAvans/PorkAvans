@@ -1,5 +1,31 @@
 <app-side-bar></app-side-bar>
 <section class="page-content">
     <article class="container" style="width: 100%;">
+
+        <div *ngIf="productSale" class="product-card">
+            <img *ngIf="productSale.product_sale_imagen" [src]="'data:image/jpeg;base64,' + productSale.product_sale_imagen" alt="Imagen del Producto" class="product-image" />
+            <h2>{{ productSale.product_sale_name }}</h2>
+            <p><strong>Descripción:</strong> {{ productSale.product_sale_description }}</p>
+            <p><strong>Precio:</strong> ${{ productSale.price }}</p>
+            <p><strong>Categoría:</strong> {{ productSale.product_category_sale_description }}</p>
+            <p><strong>Cantidad Disponible:</strong> {{ productSale.product_sale_quantity }}</p>
+            <div class="commission-info">
+              <h3>Información de Comisión</h3>
+              <p><strong>Descripción:</strong> {{ productSale.commission_description }}</p>
+              <p><strong>Valor:</strong> ${{ productSale.commission_value }}</p>
+              <p><strong>Tipo de Comisión:</strong> {{ productSale.commission_type_description }}</p>
+            </div>
+          </div>
+          
+          <div *ngIf="!productSale">
+            <p>Cargando detalles del producto...</p>
+          </div>
+          
+          <!-- Botones de acción -->
+          <div class="action-buttons">
+            <button (click)="goBack()" class="btn-cancel">Cancelar</button>
+            <button (click)="generateLink()" class="btn-generate-link">Generar Enlace</button>
+          </div>
+          
     </article>
 </section>
