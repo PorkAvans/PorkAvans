@@ -127,8 +127,19 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
-  //metodo para obtener infromaciond e un solo producto
+  //metodo para obtener la generacion del enlace
+  getProductLinkByIdAndAssociate(productSaleId: number, associateId: string): Observable<string> {
+    const url = `${this.apiUrl}/associate-commission/create-associates-commission`; // El URL para POST
+    const body = {
+      product_id: productSaleId,
+      associate_id: associateId
+    };
+  
+    return this.http.post<string>(url, body);  // Usamos POST
+  }
+  
 
+  //metodo para obtener infromaciond e un solo producto
   getProductSaleById(productSaleId: number): Observable<ProductSale> {
     return this.http.get<ProductSale>(`${this.apiUrl}/products-sales/get-product-sale-by-id?product_sale_id=${productSaleId}`);
   }

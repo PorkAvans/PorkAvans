@@ -1,3 +1,4 @@
+// product-sale-description.component.ts
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -10,6 +11,8 @@ import { AuthService, ProductSale } from '../../auth.service';
 })
 export class ProductSaleDescriptionComponent implements OnInit {
   productSale: ProductSale | null = null;
+  productLink: string | null = null;
+  associateId: string = 'someAssociateId'; // Este valor debe obtenerse dinámicamente
 
   constructor(
     private authService: AuthService,
@@ -37,11 +40,30 @@ export class ProductSaleDescriptionComponent implements OnInit {
 
   // Método para generar el enlace
   generateLink(): void {
-    if (this.productSale) {
-      // Aquí puedes definir la lógica para generar el enlace o compartir el producto
-      const enlace = `https://mi-sitio.com/producto/${this.productSale.product_sale_id}`;
-      console.log('Enlace generado:', enlace);
-      alert(`Enlace generado: ${enlace}`);
+    const userId = localStorage.getItem('user_id');
+    if (this.productSale && userId) {
+      console.log('info', this.productSale, userId);
+  
+      // Llamada al servicio para obtener el enlace con productSaleId y associateId
+      this.authService.getProductLinkByIdAndAssociate(this.productSale.product_sale_id, userId).subscribe({
+        next: (link) => {
+          this.productLink = link;  // Aquí asignamos el enlace recibido
+          console.log('Enlace generado:', this.productLink);
+          alert(`Enlace generado: ${this.productLink}`);
+        },
+        error: (error) => {
+          console.error('Error al generar el enlace:', error);
+          if (error.status === 403) {
+            alert(`No se puede generar el enlace: ${error.error.detail}`);
+          } else {
+            alert('Hubo un problema al generar el enlace.');
+          }
+        }
+      });
+    } else {
+      alert('No se pudo generar el enlace porque falta información del producto o del usuario.');
     }
   }
+   
+  
 }
