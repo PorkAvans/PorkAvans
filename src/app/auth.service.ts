@@ -134,10 +134,10 @@ export class AuthService {
       product_id: productSaleId,
       associate_id: associateId
     };
-  
+
     return this.http.post<string>(url, body);  // Usamos POST
   }
-  
+
 
   //metodo para obtener infromaciond e un solo producto
   getProductSaleById(productSaleId: number): Observable<ProductSale> {
@@ -167,7 +167,12 @@ export class AuthService {
       })
     );
   }
-  
+
+  //metodo para obtener el producto que se esta promocionando por el enlace
+  getProductDetails(productId: string, associateId: string): Observable<any> {
+    const url = `http://127.0.0.1:8000/associate-commission/product/${productId}/${associateId}`;
+    return this.http.get<any>(url);
+  }
 
   // Método para obtener productos del stock
   getStockProducts(): Observable<any[]> {

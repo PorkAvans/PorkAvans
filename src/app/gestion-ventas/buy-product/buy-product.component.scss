@@ -1,9 +1,65 @@
+/* Banner en la parte superior */
+.product-banner {
+    width: 100%; /* Ancho completo */
+    background-color: #432fdd; /* Color de fondo del banner */
+    color: white; /* Color del texto */
+    padding: 0.5rem 1rem;
+    font-weight: bold;
+    font-size: 1.5rem;
+    text-align: center;
+    position: relative;
+    z-index: 10;
+  }
+  
+  /* Estilo de la tarjeta del producto */
+  .product-container {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    padding: 2rem;
+    max-width: 1000px;
+    margin: 2rem auto 0; /* Agrega margen superior para separar de banner */
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  /* Estilo para la imagen */
+  .product-image {
+    flex: 1;
+    img {
+      width: 100%;
+      border-radius: 8px;
+      object-fit: cover;
+      max-height: 300px;
+    }
+  }
+  
+  /* Información del producto */
+  .product-info {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  
+  /* Resto del estilo sigue igual */
+  
+
+
+//---------------------------------------------------------------//
 .product-container {
     display: flex;
+    flex-direction: row;
     gap: 2rem;
-    padding: 1rem;
+    padding: 2rem;
     max-width: 1000px;
     margin: auto;
+    background-color: #fff; /* Fondo blanco para la tarjeta */
+    border: 1px solid #ddd; /* Borde alrededor de la tarjeta */
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Sombra sutil */
   }
   
   .product-image {
@@ -11,11 +67,14 @@
     img {
       width: 100%;
       border-radius: 8px;
+      object-fit: cover; /* Asegura que la imagen ocupe todo el contenedor */
+      max-height: 300px; /* Limita la altura de la imagen para un mejor diseño */
     }
     .thumbnail-images {
       display: flex;
       gap: 0.5rem;
       margin-top: 1rem;
+      justify-content: center;
       img {
         width: 60px;
         height: 60px;
@@ -31,20 +90,29 @@
   
   .product-info {
     flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  
     h2 {
-      font-size: 1.5rem;
+      font-size: 1.75rem;
       margin-bottom: 0.5rem;
+      color: #333;
     }
+  
     .price {
-      font-size: 1.25rem;
+      font-size: 1.5rem;
       color: #b12704;
       font-weight: bold;
+      margin: 0.5rem 0;
     }
-    .shipping, .delivery {
+  
+    .shipping, .delivery, .quantity {
       font-size: 0.9rem;
       color: #565959;
       margin-top: 0.25rem;
     }
+  
     .options {
       margin-top: 1rem;
       label {
@@ -55,23 +123,26 @@
       .style-options {
         display: flex;
         gap: 0.5rem;
-        .option {
+        button {
           padding: 0.5rem 1rem;
           border: 1px solid #ccc;
           border-radius: 4px;
           cursor: pointer;
+          background-color: #f9f9f9;
           &.active {
-            background-color: #f0f0f0;
+            background-color: #007bff;
             border-color: #007bff;
-            color: #007bff;
+            color: #fff;
           }
         }
       }
     }
+  
     .buy-actions {
       margin-top: 1.5rem;
       display: flex;
       gap: 0.5rem;
+  
       .add-to-cart, .buy-now {
         padding: 0.75rem 1.5rem;
         border: none;
@@ -79,19 +150,41 @@
         cursor: pointer;
         font-size: 1rem;
       }
+  
       .add-to-cart {
-        background-color: #ffd814;
-        color: #111;
+        background-color: #432fdd;
+        color: white;
       }
+  
       .buy-now {
         background-color: #e47911;
         color: white;
       }
     }
+  
     .stock-status {
       margin-top: 1rem;
-      color: #007600;
       font-weight: bold;
+      color: #007600;
+    }
+  
+    .stock-status.out-of-stock {
+      color: #b12704;
     }
   }
-  
+//----------------------------------------//
+
+.product-banner {
+    position: relative;
+    display: flex;
+    align-items: center;
+    font-size: 24px;
+    font-weight: bold;
+    padding: 10px;
+}
+
+.product-banner .logo {
+    width: 40px; /* Ajusta el tamaño según sea necesario */
+    height: auto;
+    margin-right: 10px; /* Espacio entre el logo y el texto */
+}
