@@ -12,11 +12,13 @@ export class AddProductSaleComponent implements OnInit {
   productosPaginados: ProductSale[] = [];
   productosPorPagina: number = 9;
   paginaActual: number = 1;
+  user_id: string = '';
 
   constructor(private authService: AuthService, private router: Router) {}
 
   ngOnInit(): void {
-    this.authService.getProductsSales().subscribe({
+    this.user_id = localStorage.getItem('user_id') || '';
+    this.authService.getProductsSales(this.user_id).subscribe({
       next: (response: ProductSale[]) => {
         this.productos = response;
         this.actualizarProductosPaginados();

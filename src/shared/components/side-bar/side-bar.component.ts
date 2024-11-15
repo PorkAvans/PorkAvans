@@ -43,7 +43,26 @@ export class SideBarComponent {
     this.isUsersSubmenuOpen = !this.isUsersSubmenuOpen;
   }
 
+  navigateToAddProductSale() {
+    this.router.navigate(['/gestion_afiliado/add-product-sale'])
+      .then(() => {
+        console.log('Navegación a /gestion_afiliado/add-product-sale exitosa.');
+      })
+      .catch(error => {
+        console.error('Error durante la navegación:', error);
+      });
+  }
   
+  
+  navigateToViewProductsSale() {
+    this.router.navigate(['/gestion_afiliado/view-products-sale'])
+      .then(() => {
+        console.log('Navegación a /gestion_afiliado/view-products-sale exitosa.');
+      })
+      .catch(error => {
+        console.error('Error durante la navegación:', error);
+      });
+  }  
 
   navigateToComidaSuministrada() {
 

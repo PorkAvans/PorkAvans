@@ -29,6 +29,7 @@ import { GestionAfiliadoModule } from './gestion_afiliado/gestion-afiliado.modul
 import { MatTableModule } from '@angular/material/table';
 import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
+import { BuyProductComponent } from './gestion-ventas/buy-product/buy-product.component';
 
 @NgModule({
   declarations: [

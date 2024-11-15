@@ -159,8 +159,8 @@ export class AuthService {
   }
 
   //metodo para obtener los productos en venta 
-  public getProductsSales(): Observable<ProductSale[]> {
-    return this.http.get<ProductSale[]>(`${this.apiUrl}/products-sales/products-sales`).pipe(
+  public getProductsSales(user_id: string): Observable<ProductSale[]> {
+    return this.http.get<ProductSale[]>(`${this.apiUrl}/products-sales/products-sales?associate_id=${user_id}`).pipe(
       catchError(error => {
         console.error('Error al obtener las ventas de productos', error);
         return throwError(error);
