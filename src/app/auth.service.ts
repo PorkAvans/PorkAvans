@@ -131,6 +131,32 @@ export interface ProductoRecolectadoResponse {
   productos_recolectados: ProductoRecolectado[];
 }
 
+//interface de categoria
+export interface ProductCategorySale {
+  product_category_sale_id: number;
+  description: string;
+}
+
+//interface de comision 
+export interface CommissionResponse {
+  commission_id: number;
+  value: number;
+  commission_type_description: string;
+}
+
+//interface de productos de venta
+export interface ProductSale {
+  name_product: string;
+  price: string;  // Puedes usar string o number dependiendo de cómo lo manejes en el frontend
+  description: string;
+  category_id: number;
+  quantity: number;
+  product_sale_imagen: string; // Aquí va la imagen, que puede ser un string en base64
+  commissions_id: number;
+}
+
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -139,6 +165,30 @@ export class AuthService {
   private apiUrl = 'http://localhost:8000'; // URL del endpoint para obtener el token
 
   constructor(private http: HttpClient) {
+  }
+
+
+  // Método para crear un producto de venta
+  createProductSale(product: any): Observable<any>  {
+    const url = `${this.apiUrl}/products-sales/create-product-sales`;  // Endpoint de FastAPI
+    return this.http.post<any>(url, product).pipe(
+      catchError((error) => {
+        console.error('Error al crear el producto de venta:', error);
+        return throwError(error);  // Manejo de errores
+      })
+    );
+  }
+
+  // Método para obtener las categorías
+  public getCategories(): Observable<ProductCategorySale[]> {
+    const url = `${this.apiUrl}/categority-product-sale/categories`;
+    return this.http.get<ProductCategorySale[]>(url);
+  }
+
+  // Método para obtener las comisiones
+  public getCommissions(): Observable<CommissionResponse[]> {
+    const url = `${this.apiUrl}/commission-product-sale/commissions`;
+    return this.http.get<CommissionResponse[]>(url);
   }
 
   //metodo para traer los productos por afiliado
@@ -152,7 +202,7 @@ export class AuthService {
       })
     );
   }
-  
+
 
   private handleError(error: HttpErrorResponse) {
     console.error('Error en el servicio:', error);
@@ -167,7 +217,7 @@ export class AuthService {
       associate_id: associateId
     };
 
-    
+
 
     return this.http.post<string>(url, body);  // Usamos POST
   }

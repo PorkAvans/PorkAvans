@@ -1,42 +1,36 @@
 <!-- Banner en la parte superior con el logo en la esquina izquierda -->
 <div class="product-banner">
-    <img src="assets/image/logo.png" alt="Logo" class="logo"> <!-- Imagen del logo -->
-    PorkAvans
+  <img src="assets/image/logo.png" alt="Logo" class="logo"> <!-- Imagen del logo -->
+  PorkAvans
+</div>
+
+<div class="product-container" *ngIf="product">
+  <div class="product-image">
+    <img [src]="'data:image/jpeg;base64,' + product.product_sale_imagen" alt="Product Image" />
   </div>
-  
-  <div class="product-container" *ngIf="product">
-    <div class="product-image">
-      <img 
-        [src]="'data:image/jpeg;base64,' + product.product_sale_imagen" 
-        alt="Product Image" 
-      />
-    </div>
-  
-    <div class="product-info">
-      <h2>{{ product.product_name || 'Product_name' }}</h2>
-      <p class="price">${{ product.price || '0.00' }}</p>
-      <p class="shipping">Descripción: {{ product.description || '0.00' }}</p>
-      <p class="delivery">Categoria: {{ product.category || 'Unknown' }}</p>
-      <p class="quantity">Disponible: {{ product.quantity || 'Unknown' }}</p>
-  
-      <div class="options" *ngIf="product.styles && product.styles.length > 0">
-        <label>Style:</label>
-        <div class="style-options">
-          <button 
-            *ngFor="let style of product.styles; let i = index" 
-            [class.active]="i === 0">
-            {{ style }}
-          </button>
-        </div>
+
+  <div class="product-info">
+    <h2>{{ product.product_name || 'Product_name' }}</h2>
+    <p class="price">${{ product.price || '0.00' }}</p>
+    <p class="shipping">Descripción: {{ product.description || '0.00' }}</p>
+    <p class="delivery">Categoria: {{ product.category || 'Unknown' }}</p>
+    <p class="quantity">Disponible: {{ product.quantity || 'Unknown' }}</p>
+
+    <div class="options" *ngIf="product.styles && product.styles.length > 0">
+      <label>Style:</label>
+      <div class="style-options">
+        <button *ngFor="let style of product.styles; let i = index" [class.active]="i === 0">
+          {{ style }}
+        </button>
       </div>
-  
-      <div class="buy-actions">
-        <button class="add-to-cart">Comprar</button>
-        <button class="buy-now">Buy Now</button>
-      </div>
-  
-      <p class="stock-status" [ngClass]="{'in-stock': product.inStock, 'out-of-stock': !product.inStock}">
-      </p>
     </div>
+
+    <div class="buy-actions">
+      <button class="add-to-cart">Comprar</button>
+      <button class="buy-now">Buy Now</button>
+    </div>
+
+    <p class="stock-status" [ngClass]="{'in-stock': product.inStock, 'out-of-stock': !product.inStock}">
+    </p>
   </div>
-  
+</div>

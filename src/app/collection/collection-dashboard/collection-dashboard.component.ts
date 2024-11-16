@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -6,8 +6,13 @@ import { Router } from '@angular/router';
   templateUrl: './collection-dashboard.component.html',
   styleUrls: ['./collection-dashboard.component.scss']
 })
-export class CollectionDashboardComponent {
+export class CollectionDashboardComponent implements OnInit {
+  user: string = '';
   constructor(private router: Router) {}
+
+  ngOnInit(): void {
+    this.user = localStorage.getItem('user_id') || '';
+  }
 
   redirectToAddProductSale(): void {
     this.router.navigate(['/gestion-coleccion/add-product-sale']);

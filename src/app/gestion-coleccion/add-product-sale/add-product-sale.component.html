@@ -1,9 +1,21 @@
+<div class="product-banner">
+    <img src="assets/image/logo.png" alt="Logo" class="logo"> <!-- Imagen del logo -->
+    PorkAvans
+  </div>
+
 <form (ngSubmit)="onSubmit()" #productForm="ngForm">
     <div class="form-container">
-      <!-- Imagen -->
-      <div class="image-upload">
+       <!-- Imagen -->
+    <div class="image-upload">
         <label for="product_image">Imagen del Producto</label>
+        
+        <!-- Input oculto -->
         <input type="file" id="product_image" (change)="onImageChange($event)" required />
+        
+        <!-- Vista previa de la imagen -->
+        <div class="image-preview" *ngIf="product.product_sale_imagen || !product.product_sale_imagen">
+          <img [src]="'data:image/png;base64,' + product.product_sale_imagen"  />
+        </div>
       </div>
   
       <!-- Nombre del producto -->
@@ -28,7 +40,9 @@
       <div class="form-group">
         <label for="category_id">Categoría</label>
         <select id="category_id" [(ngModel)]="product.category_id" name="category_id" required>
-          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+          <option *ngFor="let category of categories" [value]="category.product_category_sale_id">
+            {{ category.description }}
+          </option>
         </select>
       </div>
   
@@ -42,7 +56,9 @@
       <div class="form-group">
         <label for="commissions_id">Comisión</label>
         <select id="commissions_id" [(ngModel)]="product.commissions_id" name="commissions_id" required>
-          <option *ngFor="let commission of commissions" [value]="commission.id">{{ commission.name }}</option>
+          <option *ngFor="let commission of commissions" [value]="commission.commission_id">
+            {{ commission.value }} - {{ commission.commission_type_description }}
+          </option>
         </select>
       </div>
   
