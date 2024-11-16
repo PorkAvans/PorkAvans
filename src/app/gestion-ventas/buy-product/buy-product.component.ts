@@ -2,6 +2,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { AuthService } from '../../auth.service';
+import { MatDialog } from '@angular/material/dialog';
+import { PayForProductComponent } from '../pay-for-product/pay-for-product.component';
 
 @Component({
   selector: 'app-buy-product',
@@ -14,8 +16,17 @@ export class BuyProductComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private authService: AuthService
+    private authService: AuthService,
+    private dialog: MatDialog
   ) {}
+
+
+  openPayForProductModal() {
+    this.dialog.open(PayForProductComponent, {
+      width: '400px',
+      data: this.product 
+    });
+  }
 
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('product_id');

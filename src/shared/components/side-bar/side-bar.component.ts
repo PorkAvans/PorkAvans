@@ -15,6 +15,7 @@ export class SideBarComponent {
   isTrendsSubmenuOpen = false;
   isAfiliadoSubmenuOpen = false;
   isUsersSubmenuOpen = false;
+  isVentasSubmenuOpen = false;
   isCollapsed = false;  
   userRole: string = '';  // Agregar propiedad para el rol
 
@@ -37,6 +38,10 @@ export class SideBarComponent {
 
   toggleAfiliadoSubmenu() {
     this.isAfiliadoSubmenuOpen = !this.isAfiliadoSubmenuOpen;
+  }
+
+  toggleVentasSubmenu() {
+    this.isVentasSubmenuOpen = !this.isVentasSubmenuOpen;
   }
 
   toggleUserSubmenu() {

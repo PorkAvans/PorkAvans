@@ -3,15 +3,19 @@ import { CommonModule } from '@angular/common';
 
 import { GestionVentasRoutingModule } from './gestion-ventas-routing.module';
 import { BuyProductComponent } from './buy-product/buy-product.component';
+import { PayForProductComponent } from './pay-for-product/pay-for-product.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 
 @NgModule({
   declarations: [
-    BuyProductComponent
+    BuyProductComponent,
+    PayForProductComponent
   ],
   imports: [
     CommonModule,
-    GestionVentasRoutingModule
+    GestionVentasRoutingModule,
+    MatDialogModule,
   ]
 })
 export class GestionVentasModule { }

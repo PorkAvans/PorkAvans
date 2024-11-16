@@ -98,7 +98,7 @@
         <rect x="11.84" y="9.87" width="2" height="5.93" transform="translate(-5.32 12.84) rotate(-45)" />
     </symbol>
 </svg>
-<header class="page-header"  [class.collapsed]="isCollapsed">
+<header class="page-header" [class.collapsed]="isCollapsed">
     <nav>
         <a href="#" aria-label="forecastr logo" class="logo">
             <div class="logo-container">
@@ -166,7 +166,7 @@
             </li>
 
             <li *ngIf="userRole === 'ADMINISTRADOR'">
-                <button (click)="toggleUserSubmenu()"class="sidebar-button">
+                <button (click)="toggleUserSubmenu()" class="sidebar-button">
                     <svg>
                         <use xlink:href="#users"></use>
                     </svg>
@@ -205,7 +205,7 @@
             </li>
 
             <li>
-                <button  (click)="toggleAfiliadoSubmenu()"  class="sidebar-button">
+                <button (click)="toggleAfiliadoSubmenu()" class="sidebar-button">
                     <svg>
                         <use xlink:href="#afiliado"></use>
                     </svg>
@@ -223,7 +223,27 @@
                     </li>
                 </ul>
             </li>
-           
+
+            <li >
+                <button (click)="toggleVentasSubmenu()" class="sidebar-button">
+                    <svg>
+                        <use xlink:href="#ventas"></use>
+                    </svg>
+                    <span>Ventas</span>
+                </button>
+                <ul [ngClass]="{ 'submenu': true, 'show': isVentasSubmenuOpen }">
+                    <li *ngIf="userRole === 'ADMINISTRADOR'">
+                        <button (click)="navigateToViewProductsSale()">Pre ventas</button>
+                    </li>
+                    <li>
+                        <button (click)="navigateToAddProductSale()">Historico Ventas</button>
+                    </li>
+                    <!-- <li>
+                        <button (click)="navigateToComidaSuministrada()">Comida Suministrada</button>
+                    </li> -->
+                </ul>
+            </li>
+
             <li *ngIf="userRole === 'ADMINISTRADOR'">
                 <button (click)="navigateTocollection()" class="sidebar-button">
                     <svg>

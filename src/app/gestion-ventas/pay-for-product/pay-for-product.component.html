@@ -1,0 +1,9 @@
+<h2 mat-dialog-title>Pagar Producto</h2>
+<mat-dialog-content>
+  <p>Estás comprando: {{ product?.product_name || 'Producto' }}</p>
+  <p>Precio: ${{ product?.price || '0.00' }}</p>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancelar</button>
+  <button mat-raised-button color="primary" (click)="confirmPayment()">Confirmar</button>
+</mat-dialog-actions>
