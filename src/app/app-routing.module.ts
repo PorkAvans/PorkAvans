@@ -25,6 +25,8 @@ const routes: Routes = [
   { path: 'gestion_usuarios', loadChildren: () => import('./gestion_usuarios/gestion-usuarios.module').then(m => m.GestionUsuariosModule) },
   { path: 'gestion_afiliado', loadChildren: () => import('./gestion_afiliado/gestion-afiliado.module').then(m => m.GestionAfiliadoModule) },
   { path: 'gestion-ventas', loadChildren: () => import('./gestion-ventas/gestion-ventas.module').then(m => m.GestionVentasModule) },
+  { path: 'gestion-coleccion', loadChildren: () => import('./gestion-coleccion/gestion-coleccion.module').then(m => m.GestionColeccionModule) 
+  },
   
   { path: '**', redirectTo: '/login' }
 ];

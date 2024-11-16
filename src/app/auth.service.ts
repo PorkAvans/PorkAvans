@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Observable, throwError, map } from 'rxjs';
-import { HttpClient, HttpHeaders, HttpParams } from "@angular/common/http";
+import { HttpClient, HttpErrorResponse, HttpHeaders, HttpParams } from "@angular/common/http";
 import { catchError } from 'rxjs/operators';
 
 // ---------------------------------------------
@@ -87,6 +87,20 @@ export interface ProductSale {
   commission_type_description: string;
 }
 
+export interface ProductSaleAfiliado {
+  product_sale_id: number;
+  associate_id: string;
+  product_sale_name: string;
+  product_category_sale_description: string;
+  price: number;
+  commission_type_description: string;
+  description_commission: string;
+  commission_value: number;
+  product_sale_quantity: number;
+  start_date: string;
+}
+
+
 
 // Definición de la interfaz para un producto
 export interface Producto {
@@ -127,6 +141,24 @@ export class AuthService {
   constructor(private http: HttpClient) {
   }
 
+  //metodo para traer los productos por afiliado
+  getProductsByAssociate(associateId: string): Observable<ProductSaleAfiliado[]> {
+    const url = `${this.apiUrl}/associate-commission/get-products-sale-by-associate?associate_id=${associateId}`;
+    console.log('URL solicitada:', url); // Depuración
+    return this.http.get<ProductSaleAfiliado[]>(url).pipe(
+      catchError(error => {
+        console.error('Error al obtener las ventas de productos', error);
+        return throwError(error);
+      })
+    );
+  }
+  
+
+  private handleError(error: HttpErrorResponse) {
+    console.error('Error en el servicio:', error);
+    return throwError('Error al realizar la petición. Inténtalo de nuevo más tarde.');
+  }
+
   //metodo para obtener la generacion del enlace
   getProductLinkByIdAndAssociate(productSaleId: number, associateId: string): Observable<string> {
     const url = `${this.apiUrl}/associate-commission/create-associates-commission`; // El URL para POST
@@ -134,6 +166,8 @@ export class AuthService {
       product_id: productSaleId,
       associate_id: associateId
     };
+
+    
 
     return this.http.post<string>(url, body);  // Usamos POST
   }

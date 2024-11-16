@@ -1,22 +1,10 @@
-import { Component } from '@angular/core';
-import { OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
 import { MatTableDataSource } from '@angular/material/table';
-
-export interface ProductData {
-  asociado: string;
-  producto: string;
-  categoria: string;
-  comision: number;
-  cantidadDisponible: number;
-  fechaInicio: Date;
-}
-
-const PRODUCT_DATA: ProductData[] = [
-  { asociado: 'Juan', producto: 'Cerdo', categoria: 'Carne', comision: 500, cantidadDisponible: 20, fechaInicio: new Date() },
-  // Agrega más datos aquí
-];
+import { AuthService, ProductSaleAfiliado  } from '../../auth.service';
+import { catchError } from 'rxjs/operators';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-view-products-sale',
@@ -24,16 +12,49 @@ const PRODUCT_DATA: ProductData[] = [
   styleUrls: ['./view-products-sale.component.scss']
 })
 export class ViewProductsSaleComponent implements OnInit {
-  displayedColumns: string[] = ['asociado', 'producto', 'categoria', 'comision', 'cantidadDisponible', 'fechaInicio', 'opcion'];
-  dataSource = new MatTableDataSource(PRODUCT_DATA);
-  totalRecords: number = PRODUCT_DATA.length; // Asigna el total de registros aquí
+  displayedColumns: string[] = [
+    'asociado',
+    'producto',
+    'categoria',
+    'comision',
+    'cantidadDisponible',
+    'fechaInicio',
+    'opcion'
+  ];
+  dataSource = new MatTableDataSource<ProductSaleAfiliado>();
+  totalRecords: number = 0;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
 
+  constructor(private authService: AuthService) {}
+
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+    this.loadProducts();
+  }
+
+  private loadProducts(): void {
+    const associateId = localStorage.getItem('user_id');
+
+    if (!associateId) {
+      console.error('No se encontró el ID del usuario en localStorage');
+      return;
+    }
+
+    this.authService.getProductsByAssociate(associateId)
+      .pipe(
+        catchError(error => {
+          console.error('Error al cargar los productos:', error);
+          return throwError(error);
+        })
+      )
+      .subscribe((products: ProductSaleAfiliado[]) => {
+        console.log(products);
+        this.dataSource.data = products; // Asignar los datos correctamente
+        this.totalRecords = products.length;
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+      });
   }
 
   applyFilter(event: Event) {
@@ -41,11 +62,11 @@ export class ViewProductsSaleComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
-  onEdit(element: ProductData) {
+  onEdit(element: ProductSaleAfiliado) {
     console.log('Editar', element);
   }
 
-  onDelete(element: ProductData) {
+  onDelete(element: ProductSaleAfiliado) {
     console.log('Eliminar', element);
   }
 }

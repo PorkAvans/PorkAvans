@@ -1,14 +1,15 @@
-import { Component,OnInit } from '@angular/core';
+import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-collection-dashboard',
   templateUrl: './collection-dashboard.component.html',
   styleUrls: ['./collection-dashboard.component.scss']
 })
-export class CollectionDashboardComponent implements OnInit {
+export class CollectionDashboardComponent {
+  constructor(private router: Router) {}
 
-  constructor() { }
-
-  ngOnInit(): void {
+  redirectToAddProductSale(): void {
+    this.router.navigate(['/gestion-coleccion/add-product-sale']);
   }
 }

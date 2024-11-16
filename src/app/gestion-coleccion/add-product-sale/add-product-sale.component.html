@@ -1,0 +1,56 @@
+<form (ngSubmit)="onSubmit()" #productForm="ngForm">
+    <div class="form-container">
+      <!-- Imagen -->
+      <div class="image-upload">
+        <label for="product_image">Imagen del Producto</label>
+        <input type="file" id="product_image" (change)="onImageChange($event)" required />
+      </div>
+  
+      <!-- Nombre del producto -->
+      <div class="form-group">
+        <label for="name_product">Nombre del Producto</label>
+        <input type="text" id="name_product" [(ngModel)]="product.name_product" name="name_product" required />
+      </div>
+  
+      <!-- Precio -->
+      <div class="form-group">
+        <label for="price">Precio</label>
+        <input type="text" id="price" [(ngModel)]="product.price" name="price" required />
+      </div>
+  
+      <!-- Descripción -->
+      <div class="form-group">
+        <label for="description">Descripción</label>
+        <textarea id="description" [(ngModel)]="product.description" name="description" required></textarea>
+      </div>
+  
+      <!-- Categoría -->
+      <div class="form-group">
+        <label for="category_id">Categoría</label>
+        <select id="category_id" [(ngModel)]="product.category_id" name="category_id" required>
+          <option *ngFor="let category of categories" [value]="category.id">{{ category.name }}</option>
+        </select>
+      </div>
+  
+      <!-- Cantidad -->
+      <div class="form-group">
+        <label for="quantity">Cantidad</label>
+        <input type="number" id="quantity" [(ngModel)]="product.quantity" name="quantity" required />
+      </div>
+  
+      <!-- Comisión -->
+      <div class="form-group">
+        <label for="commissions_id">Comisión</label>
+        <select id="commissions_id" [(ngModel)]="product.commissions_id" name="commissions_id" required>
+          <option *ngFor="let commission of commissions" [value]="commission.id">{{ commission.name }}</option>
+        </select>
+      </div>
+  
+      <!-- Botones -->
+      <div class="form-actions">
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancelar</button>
+      </div>
+    </div>
+  </form>
+  
