@@ -1,8 +1,36 @@
 <h2 mat-dialog-title>Pagar Producto</h2>
 <mat-dialog-content>
-  <p>Estás comprando: {{ product?.product_name || 'Producto' }}</p>
-  <p>Precio: ${{ product?.price || '0.00' }}</p>
+  <p>Estás comprando: <strong>{{ product?.product_name || 'Producto' }}</strong></p>
+  <p>Precio por unidad: <strong>${{ product?.price || '0.00' }}</strong></p>
+
+  <!-- Cantidad -->
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Cantidad</mat-label>
+    <input matInput type="number" [(ngModel)]="preSaleData.pre_sale_quantity" min="1" (input)="updateTotalSale()" />
+  </mat-form-field>
+
+  <!-- Correo -->
+  <mat-form-field appearance="fill" class="full-width">
+    <mat-label>Correo Electrónico</mat-label>
+    <input matInput type="email" [(ngModel)]="preSaleData.pre_sale_email" />
+  </mat-form-field>
+
+  <!-- Imagen del Voucher -->
+  <div class="voucher-container">
+    <label for="voucherImage">Agregar Imagen</label>
+    <input id="voucherImage" type="file" (change)="onImageSelected($event)" />
+  </div>
+
+  <!-- Mostrar la imagen seleccionada (vista previa del voucher) -->
+  <div *ngIf="preSaleData.pre_sale_image">
+    <!-- <p>Vista previa del voucher:</p> -->
+    <img [src]="preSaleData.pre_sale_image" alt="Voucher de pago" style="max-width: 100%;"/>
+  </div>
+
+  <!-- Total -->
+  <p>Total: <strong>${{ preSaleData.pre_sale_total_sale.toFixed(2) }}</strong></p>
 </mat-dialog-content>
+
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Cancelar</button>
   <button mat-raised-button color="primary" (click)="confirmPayment()">Confirmar</button>

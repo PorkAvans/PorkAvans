@@ -22,11 +22,24 @@ export class BuyProductComponent implements OnInit {
 
 
   openPayForProductModal() {
+    const associateId = this.route.snapshot.paramMap.get('associate_id');
+    if (!associateId) {
+      console.error('El associate_id no está disponible');
+      return; // No abre el modal si el ID no está disponible
+    }
+  
     this.dialog.open(PayForProductComponent, {
       width: '400px',
-      data: this.product 
+      data: { 
+        ...this.product,
+        associate_id: associateId 
+      }
     });
   }
+  
+  
+  
+  
 
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('product_id');

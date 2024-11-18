@@ -4,11 +4,13 @@ import { FormsModule } from '@angular/forms';
 
 import { GestionColeccionRoutingModule } from './gestion-coleccion-routing.module';
 import { AddProductSaleComponent } from './add-product-sale/add-product-sale.component';
+import { AddCommissionComponent } from './add-commission/add-commission.component';
 
 
 @NgModule({
   declarations: [
-    AddProductSaleComponent
+    AddProductSaleComponent,
+    AddCommissionComponent
   ],
   imports: [
     CommonModule,

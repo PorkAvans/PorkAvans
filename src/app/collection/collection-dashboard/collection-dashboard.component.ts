@@ -17,4 +17,8 @@ export class CollectionDashboardComponent implements OnInit {
   redirectToAddProductSale(): void {
     this.router.navigate(['/gestion-coleccion/add-product-sale']);
   }
+
+  redirectToAddCommission(): void {
+    this.router.navigate(['/gestion-coleccion/add-commission']);
+  }
 }

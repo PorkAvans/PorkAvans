@@ -169,7 +169,7 @@ export class AuthService {
 
 
   // Método para crear un producto de venta
-  createProductSale(product: any): Observable<any>  {
+  createProductSale(product: any): Observable<any> {
     const url = `${this.apiUrl}/products-sales/create-product-sales`;  // Endpoint de FastAPI
     return this.http.post<any>(url, product).pipe(
       catchError((error) => {
@@ -201,6 +201,11 @@ export class AuthService {
         return throwError(error);
       })
     );
+  }
+
+  //metodo para hacer la compra
+  createPreSale(preSaleData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}/sale_and_presale_router/create-pre-sales`, preSaleData);
   }
 
 
