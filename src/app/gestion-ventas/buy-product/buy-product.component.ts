@@ -44,8 +44,12 @@ export class BuyProductComponent implements OnInit {
   ngOnInit(): void {
     const productId = this.route.snapshot.paramMap.get('product_id');
     const associateId = this.route.snapshot.paramMap.get('associate_id');
+    console.log('Product_id ', productId);
+    console.log('associateId ', associateId);
 
     if (productId && associateId) {
+      console.log('Product_id 2 ', productId);
+    console.log('associateId 2 ', associateId);
       this.getProductDetails(productId, associateId);
     }
   }
