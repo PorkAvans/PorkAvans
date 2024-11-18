@@ -62,6 +62,32 @@ export class ViewProductsSaleComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  generateLink(element: ProductSaleAfiliado): void {
+    const userId = localStorage.getItem('user_id');
+    
+    if (element && userId) {
+      console.log('Información para generar el enlace:', element, userId);
+  
+      this.authService.getProductLinkByIdAndAssociate(element.product_sale_id, userId).subscribe({
+        next: (link) => {
+          console.log('Enlace generado:', link);
+          alert(`Enlace generado: ${link}`);
+        },
+        error: (error) => {
+          console.error('Error al generar el enlace:', error);
+          if (error.status === 403) {
+            alert(`No se puede generar el enlace: ${error.error.detail}`);
+          } else {
+            alert('Hubo un problema al generar el enlace.');
+          }
+        }
+      });
+    } else {
+      alert('No se pudo generar el enlace porque falta información del producto o del usuario.');
+    }
+  }
+  
+
   onEdit(element: ProductSaleAfiliado) {
     console.log('Editar', element);
   }
