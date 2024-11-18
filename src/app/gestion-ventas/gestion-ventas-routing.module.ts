@@ -4,8 +4,7 @@ import {BuyProductComponent} from './buy-product/buy-product.component';
 import {PayForProductComponent} from './pay-for-product/pay-for-product.component'
 
 const routes: Routes = [
-  { path: 'product/:product_id/:associate_id', component: BuyProductComponent },
-  { path: 'product/:product_id/:associate_id', component: PayForProductComponent}
+  { path: 'product/:product_id/:associate_id', component: BuyProductComponent }
 ];
 
 @NgModule({
