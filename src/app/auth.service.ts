@@ -269,7 +269,7 @@ export class AuthService {
 
   //metodo para obtener el producto que se esta promocionando por el enlace
   getProductDetails(productId: string, associateId: string): Observable<any> {
-    const url = `https://pork-avans.netlify.app/associate-commission/product/${productId}/${associateId}`;
+    const url = `${this.apiUrl}/associate-commission/product/${productId}/${associateId}`;
     return this.http.get<any>(url);
   }
 
