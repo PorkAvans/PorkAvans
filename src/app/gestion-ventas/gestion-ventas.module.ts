@@ -8,13 +8,16 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule } from '@angular/forms';
 import { MatFormFieldModule } from '@angular/material/form-field';  // Agregado
 import { MatInputModule } from '@angular/material/input';          // Agregado
-import { MatButtonModule } from '@angular/material/button';       // Agregado
+import { MatButtonModule } from '@angular/material/button';
+import { ViewPresaleComponent } from './view-presale/view-presale.component';       // Agregado
+import { SharedModule } from '../../shared/shared.module';
 
 
 @NgModule({
   declarations: [
     BuyProductComponent,
-    PayForProductComponent
+    PayForProductComponent,
+    ViewPresaleComponent
   ],
   imports: [
     CommonModule,
@@ -23,6 +26,7 @@ import { MatButtonModule } from '@angular/material/button';       // Agregado
     FormsModule,
     MatFormFieldModule,   // Agregado
     MatInputModule,       // Agregado
+    SharedModule,
     MatButtonModule       // Agregado
   ]
 })

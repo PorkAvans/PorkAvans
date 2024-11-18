@@ -1,0 +1,56 @@
+<app-side-bar></app-side-bar>
+<section class="page-content">
+    <section class="search-and-user">
+        <div class="banner">
+            <p style="align-items: center;">Vista de Pre Venta</p>
+        </div>
+        <div class="admin-profile">
+            <span class="greeting">Hello admin</span>
+            <div class="notifications">
+                <svg>
+                    <use xlink:href="#users"></use>
+                </svg>
+            </div>
+        </div>
+    </section>
+    <article class="container" style="width: 100%;">
+        <div *ngIf="presales$ | async as presales; else noData">
+            <div *ngIf="presales.length > 0; else noData">
+              <table>
+                <thead>
+                  <tr>
+                    <th>ID</th>
+                    <th>Producto</th>
+                    <th>Cantidad</th>
+                    <th>Fecha</th>
+                    <th>Total</th>
+                    <th>Estado</th>
+                    <th>Correo</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let sale of presales">
+                    <td>{{ sale.pre_venta_id }}</td>
+                    <td>{{ sale.product_name }}</td>
+                    <td>{{ sale.pre_venta_cantidad }}</td>
+                    <td>{{ sale.fecha_pre_venta | date }}</td>
+                    <td>{{ sale.total_pre_venta | currency }}</td>
+                    <td>{{ sale.estado_pre_venta }}</td>
+                    <td>{{ sale.correo_pre_venta }}</td>
+                    <td>
+                        <img [src]="'data:image/jpeg;base64,' + sale.imagen_pre_venta" alt="Imagen Pre-Venta">
+
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+          
+          <ng-template #noData>
+            <p>No hay ventas pendientes en evaluación.</p>
+          </ng-template>
+                   
+          
+    </article>
+</section>

@@ -69,6 +69,17 @@ export class SideBarComponent {
       });
   }  
 
+  navigateToViewPresale() {
+    this.router.navigate(['/gestion-ventas/view-presale'])
+      .then(() => {
+        console.log('Navegación a /gestion-ventas/view-presale exitosa.');
+      })
+      .catch(error => {
+        console.error('Error durante la navegación:', error);
+      });
+  }
+  
+
   navigateToComidaSuministrada() {
 
     this.router.navigate(['/comida-suministrada'])

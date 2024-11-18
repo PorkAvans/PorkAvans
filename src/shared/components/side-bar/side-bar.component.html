@@ -233,7 +233,7 @@
                 </button>
                 <ul [ngClass]="{ 'submenu': true, 'show': isVentasSubmenuOpen }">
                     <li *ngIf="userRole === 'ADMINISTRADOR'">
-                        <button (click)="navigateToViewProductsSale()">Pre ventas</button>
+                        <button (click)="navigateToViewPresale()">Pre ventas</button>
                     </li>
                     <li>
                         <button (click)="navigateToAddProductSale()">Historico Ventas</button>

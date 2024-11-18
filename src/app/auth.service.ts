@@ -266,6 +266,23 @@ export class AuthService {
       })
     );
   }
+  
+  getPendingSalesEvaluation(): Observable<any> {
+    const url = `${this.apiUrl}/sale_and_presale_router/pending-sales-evaluation`;
+  
+    return this.http.get<any>(url).pipe(
+      map(response => {
+        // Verificar la estructura de la respuesta
+        console.log('Respuesta de la API:', response); // Aquí puedes verificar si la respuesta contiene la propiedad 'data'
+        return response.data; // Extraer los datos de las preventas
+      }),
+      catchError((error) => {
+        console.error('Error al obtener las ventas pendientes:', error);
+        throw error;
+      })
+    );
+  }
+  
 
   //metodo para obtener el producto que se esta promocionando por el enlace
   getProductDetails(productId: string, associateId: string): Observable<any> {
