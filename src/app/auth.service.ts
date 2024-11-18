@@ -162,7 +162,7 @@ export interface ProductSale {
 })
 
 export class AuthService {
-  private apiUrl = 'http://localhost:8000'; // URL del endpoint para obtener el token
+  private apiUrl = 'https://fastapi-porkavans.onrender.com'; // URL del endpoint para obtener el token
 
   constructor(private http: HttpClient) {
   }
@@ -201,6 +201,16 @@ export class AuthService {
         return throwError(error);
       })
     );
+  }
+
+  // Obtener los tipos de comisión
+  getCommissionTypes(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/commission-product-sale/commissions_type`);
+  }
+
+  // Crear una nueva comisión
+  createCommission(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}/commission-product-sale/create_commissions`, data);
   }
 
   //metodo para hacer la compra

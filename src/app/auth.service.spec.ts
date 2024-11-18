@@ -5,7 +5,7 @@ import {AuthService} from './auth.service';
 describe('AuthService', () => {
   let service: AuthService;
   let httpMock: HttpTestingController;
-  const apiUrl = 'http://localhost:8000/token'; // Asegúrate de que coincida con la URL en el servicio
+  const apiUrl = 'https://fastapi-porkavans.onrender.com/token'; // Asegúrate de que coincida con la URL en el servicio
 
   beforeEach(() => {
     TestBed.configureTestingModule({
