@@ -1,0 +1,57 @@
+.dialog-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  width: 90%;
+  max-width: 600px;
+  height: 80vh; /* Esto asegura que el modal se ajuste en altura */
+  margin: 20px auto;
+  text-align: center;
+  overflow: hidden;
+  position: relative;
+
+  /* Título del modal */
+  .dialog-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.2);
+  }
+
+  /* Contenedor de la imagen */
+  .image-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+    padding: 10px;
+    border-radius: 12px;
+    background-color: #f4f4f4;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    height: 60%; /* Altura relativa para que la imagen tenga suficiente espacio */
+    width: 100%;
+    overflow: hidden;
+  }
+
+  /* Estilos de la imagen */
+  .expanded-image {
+    max-height: 100%; /* Asegura que la imagen no se salga del contenedor */
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .expanded-image:hover {
+    transform: scale(1.05); /* Efecto de zoom */
+  }
+}

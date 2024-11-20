@@ -180,16 +180,89 @@ app-side-bar {
 }
 //-------------------------------------------//
 
-.table-container {
-    margin: 20px;
-    overflow: auto;
+/* Contenedor general */
+div {
+    padding: 20px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
   }
   
+  /* Tabla */
   table {
     width: 100%;
+    border-collapse: collapse;
+    background-color: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   }
   
+  thead {
+    background-color: #3f51b5; /* Verde para el encabezado */
+    color: #fff;
+    text-align: left;
+  }
+  
+  thead th {
+    padding: 12px;
+    font-size: 14px;
+    text-transform: uppercase;
+  }
+  
+  tbody tr:nth-child(even) {
+    background-color: #f9f9f9;
+  }
+  
+  tbody tr:hover {
+    background-color: #f1f1f1;
+  }
+  
+  tbody td {
+    padding: 12px;
+    font-size: 14px;
+    color: #333;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Imagen */
   img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
     border-radius: 4px;
+    display: block;
+  }
+  
+  /* Texto de "No hay datos" */
+  p {
+    text-align: center;
+    font-size: 16px;
+    color: #777;
+    margin-top: 20px;
+  }
+  
+  /* Animación para hover */
+  tr:hover td {
+    transform: scale(1.02);
+    transition: transform 0.2s ease-in-out;
+  }
+  
+  /* Ajuste responsivo */
+  @media (max-width: 768px) {
+    table {
+      font-size: 12px;
+    }
+  
+    img {
+      width: 40px;
+      height: 40px;
+    }
+  
+    p {
+      font-size: 14px;
+    }
   }
   

@@ -27,7 +27,6 @@
 
     <div class="buy-actions">
       <button class="add-to-cart" (click)="openPayForProductModal()">Comprar</button>
-      <button class="buy-now">Buy Now</button>
     </div>
 
     <p class="stock-status" [ngClass]="{'in-stock': product.inStock, 'out-of-stock': !product.inStock}">

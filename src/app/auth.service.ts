@@ -155,6 +155,23 @@ export interface ProductSale {
   commissions_id: number;
 }
 
+export interface PreVenta {
+  pre_venta_id: number;
+  pre_venta_asociado_id: string;
+  product_name: string;
+  pre_venta_cantidad: number;
+  fecha_pre_venta: string;
+  total_pre_venta: number;
+  imagen_pre_venta: string;
+}
+
+export interface Response {
+  status: number;
+  message: string;
+  data: PreVenta[];
+}
+
+
 
 
 @Injectable({
@@ -165,6 +182,11 @@ export class AuthService {
   private apiUrl = 'https://fastapi-porkavans.onrender.com'; // URL del endpoint para obtener el token
 
   constructor(private http: HttpClient) {
+  }
+
+  // Método para actualizar el estado de la pre-venta
+  changePreSaleStatus(data: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}/sale_and_presale_router/change-status-pre-sale`, data);
   }
 
 
@@ -266,15 +288,15 @@ export class AuthService {
       })
     );
   }
-  
+
   getPendingSalesEvaluation(): Observable<any> {
     const url = `${this.apiUrl}/sale_and_presale_router/pending-sales-evaluation`;
-  
+
     return this.http.get<any>(url).pipe(
       map(response => {
         // Verificar la estructura de la respuesta
         console.log('Respuesta de la API:', response); // Aquí puedes verificar si la respuesta contiene la propiedad 'data'
-        return response.data; // Extraer los datos de las preventas
+        return response; // Extraer los datos de las preventas
       }),
       catchError((error) => {
         console.error('Error al obtener las ventas pendientes:', error);
@@ -282,7 +304,7 @@ export class AuthService {
       })
     );
   }
-  
+
 
   //metodo para obtener el producto que se esta promocionando por el enlace
   getProductDetails(productId: string, associateId: string): Observable<any> {

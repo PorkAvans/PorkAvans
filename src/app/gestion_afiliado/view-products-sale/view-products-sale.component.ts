@@ -16,6 +16,7 @@ export class ViewProductsSaleComponent implements OnInit {
     'asociado',
     'producto',
     'categoria',
+    'precio',
     'comision',
     'cantidadDisponible',
     'fechaInicio',
