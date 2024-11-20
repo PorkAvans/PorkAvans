@@ -56,8 +56,7 @@ export class SideBarComponent {
       .catch(error => {
         console.error('Error durante la navegación:', error);
       });
-  }
-  
+  } 
   
   navigateToViewProductsSale() {
     this.router.navigate(['/gestion_afiliado/view-products-sale'])
@@ -73,6 +72,16 @@ export class SideBarComponent {
     this.router.navigate(['/gestion-ventas/view-presale'])
       .then(() => {
         console.log('Navegación a /gestion-ventas/view-presale exitosa.');
+      })
+      .catch(error => {
+        console.error('Error durante la navegación:', error);
+      });
+  }
+  
+  navigateToViewSale() {
+    this.router.navigate(['/gestion-ventas/view-sale'])
+      .then(() => {
+        console.log('Navegación a /gestion_ventas/view-sale exitosa.');
       })
       .catch(error => {
         console.error('Error durante la navegación:', error);

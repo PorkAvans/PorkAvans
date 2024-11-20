@@ -155,6 +155,21 @@ export interface ProductSale {
   commissions_id: number;
 }
 
+//interface de sale
+export interface Sale {
+  venta_id: string;
+  asociado_id: string;
+  name: string;
+  cantidad: number;
+  fecha_venta: string;  // o Date dependiendo de cómo lo recibas
+  total_venta: number;
+  comision_generada: number;
+  imagen_de_venta: string;
+  estado_venta: string;
+  correo_venta: string;
+  observacion_venta: string;
+}
+
 export interface PreVenta {
   pre_venta_id: number;
   pre_venta_asociado_id: string;
@@ -187,6 +202,11 @@ export class AuthService {
   // Método para actualizar el estado de la pre-venta
   changePreSaleStatus(data: any): Observable<any> {
     return this.http.put(`${this.apiUrl}/sale_and_presale_router/change-status-pre-sale`, data);
+  }
+
+  // Método para obtener las ventas por asociado
+  getSales(associateId: string): Observable<Sale[]> {
+    return this.http.get<Sale[]>(`${this.apiUrl}/sale_and_presale_router/sales/${associateId}`);
   }
 
 
