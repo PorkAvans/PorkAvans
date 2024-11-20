@@ -2,7 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AuthService } from '../../auth.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+
 
 @Component({
   selector: 'app-pay-for-product',
@@ -10,8 +10,6 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
   styleUrls: ['./pay-for-product.component.scss']
 })
 export class PayForProductComponent {
-  payForm: FormGroup; // Formulario reactivo
-
   preSaleData = {
     associate_id: '',
     product_id: 0,
@@ -24,27 +22,20 @@ export class PayForProductComponent {
 
   constructor(
     public dialogRef: MatDialogRef<PayForProductComponent>,
-    @Inject(MAT_DIALOG_DATA) public product: any,
+    @Inject(MAT_DIALOG_DATA) public product: any, // Aquí se inyectan los datos
     private authService: AuthService,
-    private snackBar: MatSnackBar,
-    private fb: FormBuilder // Usamos FormBuilder para crear el formulario reactivo
+    private snackBar: MatSnackBar 
   ) {
-    // Inicializamos el formulario reactivo
-    this.payForm = this.fb.group({
-      pre_sale_quantity: [this.preSaleData.pre_sale_quantity, [Validators.required, Validators.min(1)]],
-      pre_sale_email: [this.preSaleData.pre_sale_email, [Validators.required, Validators.email]]
-    });
-
     // Prellenar los datos básicos de la preventa con los datos del producto
     this.preSaleData.associate_id = this.product.associate_id || '';
     this.preSaleData.product_id = this.product.product_id || 0;
-    this.preSaleData.pre_sale_image = this.product.product_sale_imagen || ''; 
-    this.preSaleData.pre_sale_total_sale = this.product.price || 0;
+    this.preSaleData.pre_sale_image = this.product.product_sale_imagen || ''; // Inicializamos la imagen (si hay alguna por defecto)
+    this.preSaleData.pre_sale_total_sale = this.product.price || 0; // Por defecto, el precio por 1 unidad
   }
 
   // Actualiza el total de la preventa basado en la cantidad
   updateTotalSale() {
-    const quantity = this.payForm.get('pre_sale_quantity')?.value || 1;
+    const quantity = this.preSaleData.pre_sale_quantity || 1;
     const price = this.product?.price || 0;
     this.preSaleData.pre_sale_total_sale = quantity * price;
   }
@@ -66,35 +57,35 @@ export class PayForProductComponent {
       reader.readAsDataURL(file); // Leemos la imagen como base64
     }
   }
+  
 
   // Confirmación del pago y creación de la preventa
   confirmPayment() {
-    if (this.payForm.valid) {
-      // Llama al servicio para crear la preventa
-      console.log(this.preSaleData);
-      this.authService.createPreSale(this.preSaleData).subscribe(
-        (response) => {
-          console.log('Preventa creada exitosamente:', response);
-          
-          // Mostrar la alerta de éxito con el mensaje de la respuesta
-          this.snackBar.open(response.message, 'Cerrar', {
-            duration: 3000, // Duración en milisegundos (3 segundos)
-            horizontalPosition: 'right', // Posición horizontal
-            verticalPosition: 'top', // Posición vertical
-          });
-    
-          this.dialogRef.close(true); // Cierra el modal con éxito
-        },
-        (error) => {
-          console.error('Error al crear la preventa:', error);
-          // Opcional: mostrar un mensaje de error al usuario
-          this.snackBar.open('Error al procesar la preventa. Intenta nuevamente.', 'Cerrar', {
-            duration: 3000,
-            horizontalPosition: 'right',
-            verticalPosition: 'top',
-          });
-        }
-      );
-    }
+    // Llama al servicio para crear la preventa
+    console.log(this.preSaleData);
+    this.authService.createPreSale(this.preSaleData).subscribe(
+      (response) => {
+        console.log('Preventa creada exitosamente:', response);
+        
+        // Mostrar la alerta de éxito con el mensaje de la respuesta
+        this.snackBar.open(response.message, 'Cerrar', {
+          duration: 3000, // Duración en milisegundos (3 segundos)
+          horizontalPosition: 'right', // Posición horizontal
+          verticalPosition: 'top', // Posición vertical
+        });
+  
+        this.dialogRef.close(true); // Cierra el modal con éxito
+      },
+      (error) => {
+        console.error('Error al crear la preventa:', error);
+        // Opcional: mostrar un mensaje de error al usuario
+        this.snackBar.open('Error al procesar la preventa. Intenta nuevamente.', 'Cerrar', {
+          duration: 3000,
+          horizontalPosition: 'right',
+          verticalPosition: 'top',
+        });
+      }
+    );
   }
+  
 }
