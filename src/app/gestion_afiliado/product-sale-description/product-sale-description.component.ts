@@ -49,7 +49,6 @@ export class ProductSaleDescriptionComponent implements OnInit {
         next: (link) => {
           this.productLink = link;  // Aquí asignamos el enlace recibido
           console.log('Enlace generado:', this.productLink);
-          alert(`Enlace generado: ${this.productLink}`);
         },
         error: (error) => {
           console.error('Error al generar el enlace:', error);
@@ -61,9 +60,11 @@ export class ProductSaleDescriptionComponent implements OnInit {
         }
       });
     } else {
-      alert('No se pudo generar el enlace porque falta información del producto o del usuario.');
+      // Si falta información del producto o del usuario, solo mostrar un mensaje en la consola (sin alerta)
+      console.log('No se pudo generar el enlace porque falta información del producto o del usuario.');
     }
   }
+  
    
   
 }

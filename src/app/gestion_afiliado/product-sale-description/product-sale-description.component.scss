@@ -179,76 +179,96 @@ app-side-bar {
     }
 }
 //--------------------------------------/
-
 .product-card {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-  }
-  
-  .product-image {
-    max-width: 100%;
-    height: auto;
-    border-radius: 8px;
-    margin-bottom: 15px;
-  }
-  
-  h2 {
-    font-size: 24px;
-    color: #333;
-  }
-  
-  p {
-    font-size: 16px;
-    color: #555;
-    margin: 5px 0;
-  }
-  
-  .commission-info {
-    margin-top: 20px;
-    border-top: 1px solid #ddd;
-    padding-top: 10px;
-  }
-  
-  .commission-info h3 {
-    font-size: 20px;
-    color: #333;
-    margin-bottom: 10px;
-  }
-  
-  .action-buttons {
-    display: flex;
-    justify-content: space-around;
-    margin-top: 20px;
-  }
-  
-  .btn-cancel, .btn-generate-link {
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .btn-cancel {
-    background-color: #f44336; /* Color rojo para cancelar */
-    color: white;
-  }
-  
-  .btn-generate-link {
-    background-color: #4CAF50; /* Color verde para generar enlace */
-    color: white;
-  }
-  
-  .btn-cancel:hover {
-    background-color: #d32f2f;
-  }
-  
-  .btn-generate-link:hover {
-    background-color: #388e3c;
-  }
-  
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.product-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+h2 {
+  font-size: 24px;
+  color: #333;
+}
+
+p {
+  font-size: 16px;
+  color: #555;
+  margin: 5px 0;
+}
+
+.commission-info {
+  margin-top: 20px;
+  border-top: 1px solid #ddd;
+  padding-top: 10px;
+}
+
+.commission-info h3 {
+  font-size: 20px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin-top: 20px;
+  align-items: center; /* Centra los botones y el enlace */
+}
+
+.btn-cancel, .btn-generate-link {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  width: 100%; /* Asegura que ambos botones tengan el mismo ancho */
+  max-width: 300px; /* Limita el tamaño máximo de los botones */
+}
+
+.btn-cancel {
+  background-color: #f44336; /* Color rojo para cancelar */
+  color: white;
+}
+
+.btn-generate-link {
+  background-color: #4CAF50; /* Color verde para generar enlace */
+  color: white;
+}
+
+.btn-cancel:hover {
+  background-color: #d32f2f;
+}
+
+.btn-generate-link:hover {
+  background-color: #388e3c;
+}
+
+.product-link-container {
+  display: flex;
+  flex-direction: column; /* Coloca el campo y la etiqueta verticalmente */
+  gap: 5px; /* Añade espacio entre el campo y la etiqueta */
+  width: 100%; /* Asegura que ocupe el mismo ancho que los botones */
+  max-width: 600px; /* Aumenta el tamaño máximo para que sea más largo */
+}
+
+.product-link-input {
+  width: 100%;
+  padding: 8px;
+  font-size: 14px;
+  background-color: #f1f1f1;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  word-wrap: break-word; /* Permite que el texto se ajuste automáticamente si es muy largo */
+}

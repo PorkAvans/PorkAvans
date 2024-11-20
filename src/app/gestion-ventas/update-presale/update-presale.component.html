@@ -1,40 +1,26 @@
 <h2>Actualizar Estado de Pre-Venta</h2>
 <form #form="ngForm">
-  <div>
-    <label for="pre_venta_id">ID de la Preventa</label>
-    <input 
-      id="pre_venta_id" 
-      type="text" 
-      [value]="data.pre_venta_id" 
-      disabled 
-    />
-  </div>
+    <!-- <div>
+        <label for="pre_venta_id">ID de la Preventa</label>
+        <input id="pre_venta_id" type="text" [value]="data.pre_venta_id" disabled />
+    </div> -->
 
-  <div>
-    <label for="estado">Estado</label>
-    <select 
-      id="estado" 
-      [(ngModel)]="data.estado_pre_venta" 
-      name="estado" 
-      required>
-      <option value="APROBADA">APROBADA</option>
-      <option value="RECHAZADA">RECHAZADA</option>
-    </select>
-  </div>
+    <div>
+        <label for="estado">Estado</label>
+        <select id="estado" [(ngModel)]="data.estado_pre_venta" name="estado" required>
+            <option value="APROBADA">APROBADA</option>
+            <option value="RECHAZADA">RECHAZADA</option>
+        </select>
+    </div>
 
-  <div>
-    <label for="observacion">Observación</label>
-    <textarea
-      id="observacion"
-      [(ngModel)]="data.observacion"
-      name="observacion"
-      rows="4"
-      required>
+    <div>
+        <label for="observacion">Observación</label>
+        <textarea id="observacion" [(ngModel)]="data.observacion" name="observacion" rows="4" required>
     </textarea>
-  </div>
+    </div>
 
-  <div class="actions">
-    <button type="button" (click)="close()">Cancelar</button>
-    <button type="button" (click)="saveChanges(data)" [disabled]="!form.valid">Guardar</button>
-  </div>
+    <div class="actions">
+        <button type="button" (click)="close()">Cancelar</button>
+        <button type="button" (click)="saveChanges(data)" [disabled]="!form.valid">Guardar</button>
+    </div>
 </form>
