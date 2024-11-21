@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { AuthService, Sale } from '../../auth.service';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
+import { AuthService, Sale } from '../../auth.service';
 
 @Component({
   selector: 'app-view-sale',
@@ -11,13 +11,13 @@ import { MatTableDataSource } from '@angular/material/table';
 export class ViewSaleComponent implements OnInit {
   sales: Sale[] = [];
   displayedColumns: string[] = [
-    'venta_id',
-    'name',
-    'cantidad',
-    'fecha_venta',
-    'total_venta',
-    'comision_generada',
-    'estado_venta'
+    'asociado_id',     // ID del asociado
+    'name',            // Nombre
+    'cantidad',        // Cantidad
+    'fecha_venta',     // Fecha de venta
+    'total_venta',     // Total de la venta
+    'comision_generada', // Comisión generada
+    'estado_venta'     // Estado de la venta
   ];
   dataSource = new MatTableDataSource<Sale>([]);
 
@@ -32,11 +32,26 @@ export class ViewSaleComponent implements OnInit {
       return;
     }
 
+    // Configurar el filtro personalizado
+    this.dataSource.filterPredicate = (data: Sale, filter: string): boolean => {
+      const normalizedFilter = filter.trim().toLowerCase();
+      return (
+        data.asociado_id.toString().toLowerCase().includes(normalizedFilter) ||
+        data.name.toLowerCase().includes(normalizedFilter) ||
+        data.estado_venta.toLowerCase().includes(normalizedFilter)
+      );
+    };
+
+    // Obtener los datos (ventas) desde el servicio
     this.authService.getSales(associateId).subscribe(
       (data: Sale[]) => {
         this.sales = data;
         this.dataSource.data = data;
-        this.dataSource.paginator = this.paginator;
+
+        // Configurar el paginador después de cargar los datos
+        setTimeout(() => {
+          this.dataSource.paginator = this.paginator;
+        });
       },
       (error) => {
         console.error('Error al obtener las ventas:', error);
@@ -44,9 +59,11 @@ export class ViewSaleComponent implements OnInit {
     );
   }
 
-  applyFilter(event: Event) {
+  // Filtro de búsqueda
+  applyFilter(event: Event): void {
     const filterValue = (event.target as HTMLInputElement).value;
     this.dataSource.filter = filterValue.trim().toLowerCase();
+
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
