@@ -17,7 +17,7 @@ const routes: Routes = [
   { path: 'comida-suministrada', component: ComidaSuministradaComponent, canActivate: [AuthGuard] }, // Protegida
   { path: 'stock-products', component: StockComponent, canActivate: [AuthGuard] }, // Protegida
   { path: '', redirectTo: '/login', pathMatch: 'full' },
-  { path: 'add-afiliado', component: AddAfiliadoComponent, canActivate: [AuthGuard] }, // Protegida
+  { path: 'add-afiliado', component: AddAfiliadoComponent}, // Protegida
   
   // Rutas protegidas con lazy loading
   { path: 'gestion-distribuidores', loadChildren: () => import('./gestion-distribuidores/gestion-distribuidores.module').then(m => m.GestionDistribuidoresModule), canActivate: [AuthGuard] },
