@@ -218,9 +218,6 @@
                     <li>
                         <button (click)="navigateToAddProductSale()">Productos en venta</button>
                     </li>
-                    <li>
-                        <button (click)="navigateToComidaSuministrada()">Comida Suministrada</button>
-                    </li>
                 </ul>
             </li>
 
@@ -253,21 +250,22 @@
                 <h3>Settings</h3>
             </li>
             <li *ngIf="userRole === 'ADMINISTRADOR'">
-                <a href="#0">
-                    <svg>
-                        <use xlink:href="#settings"></use>
-                    </svg>
-                    <span>Settings</span>
-                </a>
-            </li>
-            <li>
+                <button (click)="logout()" class="sidebar-button">
+                  <svg>
+                    <use xlink:href="#settings"></use>
+                  </svg>
+                  <span>Cerrar sesión</span>
+                </button>
+              </li>
+              
+            <!-- <li>
                 <a href="#0">
                     <svg>
                         <use xlink:href="#options"></use>
                     </svg>
                     <span>Options</span>
                 </a>
-            </li>
+            </li> -->
             <li>
                 <div class="switch">
                     <input type="checkbox" id="mode" checked>

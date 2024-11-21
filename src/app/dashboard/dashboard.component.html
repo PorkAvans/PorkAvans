@@ -49,8 +49,8 @@
                                           </svg>
 
                                     </div>
-                                    <div class="titulo">Usuarios</div>
-                                    <div>{{ usuarios }}</div>
+                                    <div class="titulo1">Usuarios</div>
+                                    <div class="number">{{ usuarios }}</div>
                               </div>
                               <div class="stat">
                                     <div class="icon">
@@ -93,9 +93,9 @@
                                                       <circle fill="#F76D57" cx="32" cy="14" r="3" />
                                                 </g>
                                           </svg>
-                                          <div class="titulo">Distribuidores</div>
+                                          <div class="titulo2">Distribuidores</div>
                                     </div>
-                                    <div>{{ total_distribuidores }}</div>
+                                    <div class="number22">{{ total_distribuidores }}</div>
                               </div>
                               <div class="stat">
                                     <div class="icon">
@@ -138,7 +138,7 @@
                                           </svg>
                                           <div class="titulo">Deuda</div>
                                     </div>
-                                    <div>{{ total_deuda }}</div>
+                                    <div class="number3">{{ total_deuda }}</div>
                               </div>
                               <div class="stat">
                                     <div class="icon">
@@ -166,9 +166,9 @@
                                                       </g>
                                                 </g>
                                           </svg>
-                                          <div class="titulo">pago mes</div>
+                                          <div class="titulo4">pago mes</div>
                                     </div>
-                                    <div>{{ pago_mes }}</div>
+                                    <div class="number4">{{ pago_mes }}</div>
                               </div>
                               <div class="stat">
                                     <div class="icon">
@@ -477,9 +477,9 @@
                                                 <path class="i"
                                                       d="M135.309,166.386a5.665,5.665,0,0,0,.179,6.027,8.518,8.518,0,0,0,4.578,3.442,2.014,2.014,0,0,0,2.461-1.4,2.048,2.048,0,0,0-1.4-2.461q-.31-.1-.612-.231l.478.2a6.95,6.95,0,0,1-1-.529c-.083-.053-.163-.11-.244-.165-.268-.184.316.259.134.108-.133-.111-.266-.222-.392-.342s-.219-.218-.322-.333A1.7,1.7,0,0,0,139,170.5l.2.262c-.036-.047-.072-.1-.106-.145a5.032,5.032,0,0,1-.514-.91l.2.478a4.637,4.637,0,0,1-.294-1.065l.071.532a4.041,4.041,0,0,1,0-.989l-.072.532a3.471,3.471,0,0,1,.2-.751l-.2.478a3.193,3.193,0,0,1,.283-.516,2.013,2.013,0,0,0-.717-2.736,2.05,2.05,0,0,0-2.737.717Z" />
                                           </svg>
-                                          <div class="titulo">Productos</div>
+                                          <div class="titulo6">Productos</div>
                                     </div>
-                                    <div>{{ total_productos }}</div>
+                                    <div class="number6">{{ total_productos }}</div>
                               </div>
                         </div>
                   </article>
@@ -535,7 +535,7 @@
 
                   <article class="tabla">
                         <div class="titulo-producto">
-                              <h1>PRODUCTOS</h1>
+                              <h1 class="titulo7">PRODUCTOS</h1>
                         </div>
                         <div *ngIf="productosData && productosData.length > 0; else noData">
                               <div class="table-container">
