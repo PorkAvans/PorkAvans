@@ -379,11 +379,11 @@ body {
   text-overflow: ellipsis;
 }
 
-.stat > div:last-child {
-  margin-top: 10px; /* Agrega un margen superior al valor de los usuarios */
-  position: relative;
-  top: 42px;
-}
+// .stat > div:last-child {
+//   margin-top: 10px; /* Agrega un margen superior al valor de los usuarios */
+//   position: relative;
+//   top: 42px;
+// }
 
 
 @media (max-width: 768px) {
@@ -1081,6 +1081,56 @@ overflow: auto;
 .titulo{
   position: relative;
   top: 15px
+}
+.titulo1{
+  position: relative;
+  top: 40px
+}
+
+.titulo2{
+  position: relative;
+  top: 15px;
+  right: 29px;
+}
+.titulo4{
+  position: relative;
+  bottom: 1px;
+  right: 20px;
+}
+
+.titulo6{
+  position: relative;
+  top: 1px;
+  right: 25px;
+}
+
+.titulo7{
+  position: relative;
+  top: 58px;
+}
+.number {
+  position: relative;
+  top: 40px;
+}
+
+.number22 {
+  position: relative;
+  top: 65px;
+}
+
+.number3 {
+  position: relative;
+  top: 65px;
+}
+
+.number4{
+  position: relative;
+  top: 46px;
+}
+
+.number6{
+  position: relative;
+  top: 45px;
 }
 
 

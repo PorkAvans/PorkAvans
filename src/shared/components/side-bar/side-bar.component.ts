@@ -16,10 +16,10 @@ export class SideBarComponent {
   isAfiliadoSubmenuOpen = false;
   isUsersSubmenuOpen = false;
   isVentasSubmenuOpen = false;
-  isCollapsed = false;  
+  isCollapsed = false;
   userRole: string = '';  // Agregar propiedad para el rol
 
-  constructor(private router: Router) { 
+  constructor(private router: Router) {
     this.getUserRole();  // Obtener el rol del usuario al iniciar el componente
   }
 
@@ -56,8 +56,8 @@ export class SideBarComponent {
       .catch(error => {
         console.error('Error durante la navegación:', error);
       });
-  } 
-  
+  }
+
   navigateToViewProductsSale() {
     this.router.navigate(['/gestion_afiliado/view-products-sale'])
       .then(() => {
@@ -66,7 +66,7 @@ export class SideBarComponent {
       .catch(error => {
         console.error('Error durante la navegación:', error);
       });
-  }  
+  }
 
   navigateToViewPresale() {
     this.router.navigate(['/gestion-ventas/view-presale'])
@@ -77,7 +77,7 @@ export class SideBarComponent {
         console.error('Error durante la navegación:', error);
       });
   }
-  
+
   navigateToViewSale() {
     this.router.navigate(['/gestion-ventas/view-sale'])
       .then(() => {
@@ -87,7 +87,7 @@ export class SideBarComponent {
         console.error('Error durante la navegación:', error);
       });
   }
-  
+
 
   navigateToComidaSuministrada() {
 
@@ -129,7 +129,7 @@ export class SideBarComponent {
         console.error('Error durante la navegación:', error);
       });
   }
-  
+
 
   navigateToViewuser() {
     this.router.navigate(['/gestion_usuarios/view-user'])
@@ -183,4 +183,16 @@ export class SideBarComponent {
         console.error('Error durante la navegación:', error);
       });
   }
+
+  logout() {
+    // Limpiar el localStorage u otra información del usuario
+    localStorage.clear();
+
+    // Redirigir al login
+    this.router.navigate(['/login']).then(() => {
+      // Reemplazar el estado actual para evitar volver atrás
+      history.replaceState(null, '', '/login');
+    });
+  }
+
 }
