@@ -6,7 +6,9 @@
   <!-- Cantidad -->
   <mat-form-field appearance="fill" class="full-width">
     <mat-label>Cantidad</mat-label>
-    <input matInput type="number" [(ngModel)]="preSaleData.pre_sale_quantity" min="1" (input)="updateTotalSale()" />
+    <input matInput type="number" [(ngModel)]="preSaleData.pre_sale_quantity" [max]="product.quantity || 0" min="1"
+      (input)="updateTotalSale()" />
+    <mat-hint *ngIf="product.quantity">Máximo disponible: {{ product.quantity }}</mat-hint>
   </mat-form-field>
 
   <!-- Correo -->
@@ -24,7 +26,7 @@
   <!-- Mostrar la imagen seleccionada (vista previa del voucher) -->
   <div *ngIf="preSaleData.pre_sale_image">
     <!-- <p>Vista previa del voucher:</p> -->
-    <img [src]="preSaleData.pre_sale_image" alt="Voucher de pago" style="max-width: 100%;"/>
+    <img [src]="preSaleData.pre_sale_image" alt="Voucher de pago" style="max-width: 100%;" />
   </div>
 
   <!-- Total -->

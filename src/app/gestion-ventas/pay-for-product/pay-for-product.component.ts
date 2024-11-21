@@ -24,7 +24,7 @@ export class PayForProductComponent {
     public dialogRef: MatDialogRef<PayForProductComponent>,
     @Inject(MAT_DIALOG_DATA) public product: any, // Aquí se inyectan los datos
     private authService: AuthService,
-    private snackBar: MatSnackBar 
+    private snackBar: MatSnackBar
   ) {
     // Prellenar los datos básicos de la preventa con los datos del producto
     this.preSaleData.associate_id = this.product.associate_id || '';
@@ -35,10 +35,23 @@ export class PayForProductComponent {
 
   // Actualiza el total de la preventa basado en la cantidad
   updateTotalSale() {
-    const quantity = this.preSaleData.pre_sale_quantity || 1;
+    const maxQuantity = this.product.quantity || 0; // Cantidad máxima disponible
+    const enteredQuantity = this.preSaleData.pre_sale_quantity || 1;
+
+    // Verificar si la cantidad ingresada excede el máximo disponible
+    if (enteredQuantity > maxQuantity) {
+      this.preSaleData.pre_sale_quantity = maxQuantity; // Ajustar al máximo permitido
+      this.snackBar.open('La cantidad ingresada excede el stock disponible.', 'Cerrar', {
+        duration: 1000,
+        horizontalPosition: 'right',
+        verticalPosition: 'top',
+      });
+    }
+
     const price = this.product?.price || 0;
-    this.preSaleData.pre_sale_total_sale = quantity * price;
+    this.preSaleData.pre_sale_total_sale = this.preSaleData.pre_sale_quantity * price;
   }
+
 
   // Función que se ejecuta al seleccionar una imagen (voucher)
   onImageSelected(event: any) {
@@ -48,7 +61,7 @@ export class PayForProductComponent {
         console.error('El archivo debe ser una imagen.');
         return; // No hacer nada si el archivo no es una imagen
       }
-  
+
       const reader = new FileReader();
       reader.onloadend = () => {
         this.preSaleData.pre_sale_image = reader.result as string; // Guardamos la imagen en base64
@@ -57,7 +70,7 @@ export class PayForProductComponent {
       reader.readAsDataURL(file); // Leemos la imagen como base64
     }
   }
-  
+
 
   // Confirmación del pago y creación de la preventa
   confirmPayment() {
@@ -66,14 +79,14 @@ export class PayForProductComponent {
     this.authService.createPreSale(this.preSaleData).subscribe(
       (response) => {
         console.log('Preventa creada exitosamente:', response);
-        
+
         // Mostrar la alerta de éxito con el mensaje de la respuesta
         this.snackBar.open(response.message, 'Cerrar', {
           duration: 3000, // Duración en milisegundos (3 segundos)
           horizontalPosition: 'right', // Posición horizontal
           verticalPosition: 'top', // Posición vertical
         });
-  
+
         this.dialogRef.close(true); // Cierra el modal con éxito
       },
       (error) => {
@@ -87,5 +100,5 @@ export class PayForProductComponent {
       }
     );
   }
-  
+
 }
