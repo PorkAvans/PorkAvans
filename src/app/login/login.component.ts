@@ -60,7 +60,10 @@ export class LoginComponent {
     });
   }
 
-  navigateToRegister() {
-    this.router.navigateByUrl("/add-afiliado");
+  navigateToRegister(event: Event): void {
+    event.preventDefault();
+    this.router.navigate(['/gestion_afiliado/add-afiliado']);
   }
+  
+  
 }

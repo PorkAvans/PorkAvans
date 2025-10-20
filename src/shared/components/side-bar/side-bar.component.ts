@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, ElementRef, Renderer2, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 
@@ -11,17 +11,55 @@ import { Router } from '@angular/router';
 
 
 export class SideBarComponent {
-
+  user: string = '';
+  isClosed = false;
+  isAnimalSubmenuOpen = false;
   isTrendsSubmenuOpen = false;
   isAfiliadoSubmenuOpen = false;
   isUsersSubmenuOpen = false;
   isVentasSubmenuOpen = false;
-  isCollapsed = false;
+  isCollapsed = true;
   userRole: string = '';  // Agregar propiedad para el rol
 
-  constructor(private router: Router) {
+  @Output() toggle = new EventEmitter<boolean>();
+
+
+
+  constructor(private router: Router, private el: ElementRef, private renderer: Renderer2) {
     this.getUserRole();  // Obtener el rol del usuario al iniciar el componente
   }
+  ngOnInit(): void {
+    this.user = localStorage.getItem('user_id') || '';
+    const trigger = this.el.nativeElement.querySelector('.hamburger');
+    const overlay = this.el.nativeElement.querySelector('.overlay');
+    const toggleBtn = this.el.nativeElement.querySelector('[data-toggle="offcanvas"]');
+    const wrapper = this.el.nativeElement.querySelector('#wrapper');
+
+    // Evento click del botón hamburguesa
+    this.renderer.listen(trigger, 'click', () => {
+      if (this.isClosed) {
+        this.renderer.setStyle(overlay, 'display', 'none');
+        this.renderer.removeClass(trigger, 'is-open');
+        this.renderer.addClass(trigger, 'is-closed');
+      } else {
+        this.renderer.setStyle(overlay, 'display', 'block');
+        this.renderer.removeClass(trigger, 'is-closed');
+        this.renderer.addClass(trigger, 'is-open');
+      }
+      this.isClosed = !this.isClosed;
+    });
+
+    // Evento click para toggle del wrapper
+    this.renderer.listen(toggleBtn, 'click', () => {
+      if (wrapper.classList.contains('toggled')) {
+        this.renderer.removeClass(wrapper, 'toggled');
+      } else {
+        this.renderer.addClass(wrapper, 'toggled');
+      }
+    });
+  }
+
+
 
   getUserRole() {
     const role = localStorage.getItem('user_rol');  // Suponiendo que el rol está guardado en el localStorage
@@ -34,6 +72,9 @@ export class SideBarComponent {
 
   toggleTrendsSubmenu() {
     this.isTrendsSubmenuOpen = !this.isTrendsSubmenuOpen;
+  }
+  toggleAnimalSubmenu() {
+    this.isAnimalSubmenuOpen = !this.isAnimalSubmenuOpen;
   }
 
   toggleAfiliadoSubmenu() {
@@ -48,6 +89,19 @@ export class SideBarComponent {
     this.isUsersSubmenuOpen = !this.isUsersSubmenuOpen;
   }
 
+  navigateToViewProducts() {
+    this.router.navigate(['/products'])
+      .then(() => {
+        console.log('Navegación a /products exitosa.');
+        this.isTrendsSubmenuOpen = false;  // Para cerrar el submenú si quieres
+      })
+      .catch(error => {
+        console.error('Error durante la navegación:', error);
+      });
+  }
+
+
+
   navigateToAddProductSale() {
     this.router.navigate(['/gestion_afiliado/add-product-sale'])
       .then(() => {
@@ -56,6 +110,14 @@ export class SideBarComponent {
       .catch(error => {
         console.error('Error durante la navegación:', error);
       });
+  }
+
+  redirectToAddProductSale(): void {
+    this.router.navigate(['/gestion-coleccion/add-product-sale']);
+  }
+
+  redirectToAddCommission(): void {
+    this.router.navigate(['/gestion-coleccion/add-commission']);
   }
 
   navigateToViewProductsSale() {
@@ -88,6 +150,12 @@ export class SideBarComponent {
       });
   }
 
+  toggleSidebar() {
+    this.isClosed = !this.isClosed;
+    this.isCollapsed = !this.isCollapsed;
+  }
+
+
 
   navigateToComidaSuministrada() {
 
@@ -116,6 +184,18 @@ export class SideBarComponent {
         console.error('Error durante la navegación:', error);
       });
   }
+
+  navigateToFaseCrianza() {
+    this.router.navigate(['/fase-crianza']) 
+      .then(() => {
+        console.log('Navegación a /fase-crianza/view.');
+        this.isTrendsSubmenuOpen = false;
+      })
+      .catch(error => {
+        console.error('Error durante la navegación:', error);
+      });
+  }
+
 
   navigateToViewAdministrador() {
     this.router.navigate(['/gestion-distribuidores/view-administrador'])
